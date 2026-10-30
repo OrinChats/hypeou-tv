@@ -1,0 +1,228 @@
+/*
+ * Hypeou visual refresh inspired by OwnTV.
+ * Presentation-only layer: preserves React routes, data, playback and controls.
+ */
+:root {
+  color-scheme: dark;
+  --hype-bg: #080a0d;
+  --hype-surface: #11151a;
+  --hype-surface-raised: #191f26;
+  --hype-border: rgba(255, 255, 255, .09);
+  --hype-muted: #9aa4ae;
+  --hype-accent: #68d9c7;
+  --hype-accent-soft: rgba(104, 217, 199, .16);
+}
+
+html, body, #root { background: var(--hype-bg); }
+body { color: #f4f6f7; }
+button { -webkit-tap-highlight-color: transparent; }
+
+/* Shared streaming-app visual language */
+.tela {
+  background: var(--hype-bg);
+  color: #f4f6f7;
+}
+.tela-vazio { color: var(--hype-muted); }
+.tela-vazio h2 { color: #f4f6f7; }
+.fileira { margin-bottom: 2rem; }
+.fileira > header { align-items: center; margin-bottom: .85rem; }
+.fileira h2 { font-size: clamp(1.05rem, 1.35vw, 1.35rem); font-weight: 720; letter-spacing: -.025em; }
+.fileira-ver { color: var(--hype-accent); }
+.fileira-trilho { gap: 16px; padding-top: 9px; padding-bottom: 14px; }
+.cartao-capa { width: clamp(126px, 10.4vw, 174px); gap: 8px; }
+.cartao-capa-img {
+  border-radius: 10px;
+  background: #171d23;
+  border: 1px solid rgba(255,255,255,.06);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.cartao-capa:hover .cartao-capa-img,
+.cartao-capa:focus-visible .cartao-capa-img {
+  transform: scale(1.045);
+  border-color: var(--hype-accent);
+  box-shadow: 0 12px 30px rgba(0,0,0,.38);
+}
+.cartao-capa strong { color: #f1f4f5; font-size: .86rem; }
+.cartao-capa small { color: var(--hype-muted); }
+.cartao-capa-prog b, .cartao-largo-prog b { background: var(--hype-accent); }
+.cartao-largo {
+  background: var(--hype-surface);
+  border: 1px solid var(--hype-border);
+  border-radius: 12px;
+}
+.cartao-largo:hover, .cartao-largo:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(104,217,199,.7);
+  background: var(--hype-surface-raised);
+}
+.cartao-largo-logo { background: rgba(255,255,255,.035); }
+
+/* Cinematic featured title */
+.heroi {
+  height: clamp(390px, 62vh, 700px);
+  margin: 0 0 1.5rem;
+  align-items: flex-end;
+}
+.heroi-vinheta {
+  background:
+    linear-gradient(90deg, rgba(8,10,13,.96) 0%, rgba(8,10,13,.76) 28%, rgba(8,10,13,.18) 72%, rgba(8,10,13,.08) 100%),
+    linear-gradient(0deg, var(--hype-bg) 0%, rgba(8,10,13,.12) 45%, rgba(8,10,13,.08) 100%);
+}
+.heroi-texto { padding: 0 clamp(28px, 5vw, 76px) 3rem; max-width: 790px; }
+.heroi h1 { font-size: clamp(2.2rem, 4.2vw, 4.6rem); letter-spacing: -.045em; }
+.heroi p { max-width: 620px; color: rgba(244,246,247,.78); line-height: 1.62; }
+.heroi-acoes { gap: 12px; }
+.heroi-botao { border-radius: 8px; height: 48px; padding: 0 25px; }
+.heroi-botao.principal { background: #f4f6f7; color: #101418; border-color: #f4f6f7; }
+.heroi-botao.principal:hover, .heroi-botao.principal:focus-visible { background: var(--hype-accent); border-color: var(--hype-accent); }
+.heroi-botao.ativo { color: var(--hype-accent); border-color: var(--hype-accent); }
+.heroi-ponto.ativo { background: var(--hype-accent); }
+.generos-atalhos button { border-radius: 7px; background: #14191f; border-color: var(--hype-border); }
+.generos-atalhos button:hover, .generos-atalhos button:focus-visible { background: var(--hype-accent-soft); border-color: var(--hype-accent); }
+.sem-lista-acao { border-radius: 8px; background: var(--hype-accent); color: #07110f; }
+
+/* Top navigation becomes a remote-friendly rail on Android TV. */
+.modo-tv .barra-topo {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transform: none;
+  width: 218px;
+  height: 100dvh;
+  min-height: 100vh;
+  padding: 28px 16px 22px;
+  border: 0;
+  border-right: 1px solid var(--hype-border);
+  border-radius: 0;
+  background: rgba(12,15,19,.97);
+  box-shadow: 12px 0 36px rgba(0,0,0,.18);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 30px;
+}
+.modo-tv .barra-topo.oculta { transform: translateX(-105%); }
+.modo-tv .barra-logo { justify-content: flex-start; width: 100%; padding: 8px 10px; font-size: 1.12rem; }
+.modo-tv .barra-logo svg { width: 30px; height: 30px; flex: 0 0 30px; }
+.modo-tv .barra-abas {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 6px;
+  width: 100%;
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+}
+.modo-tv .barra-capsula { display: none; }
+.modo-tv .barra-abas button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  width: 100%;
+  min-height: 50px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #aab3bc;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+.modo-tv .barra-abas button svg { width: 21px; height: 21px; flex: 0 0 21px; }
+.modo-tv .barra-abas button span { display: inline !important; }
+.modo-tv .barra-abas button.on {
+  color: #f7fbfa;
+  background: var(--hype-accent-soft);
+  border-color: rgba(104,217,199,.2);
+}
+.modo-tv .barra-abas button.on svg { color: var(--hype-accent); }
+.modo-tv .barra-abas button.destacada { margin-top: auto; }
+.modo-tv .barra-direita {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 8px 0;
+  border-top: 1px solid var(--hype-border);
+}
+.modo-tv .barra-relogio { font-size: 13px; color: var(--hype-muted); }
+.modo-tv .barra-engrenagem { color: #aab3bc; }
+.modo-tv .tela-com-barra { padding: 0 0 3rem 218px; }
+.modo-tv .heroi { margin-top: 0; height: clamp(420px, 66vh, 720px); }
+.modo-tv .heroi-texto { padding-left: clamp(34px, 4vw, 68px); }
+.modo-tv .fileira > header { padding-left: clamp(34px, 4vw, 68px); padding-right: 38px; }
+.modo-tv .fileira-trilho { padding-left: clamp(34px, 4vw, 68px); padding-right: 38px; }
+.modo-tv .generos-atalhos { padding-left: clamp(34px, 4vw, 68px); }
+.modo-tv .cartao-capa { width: clamp(145px, 11vw, 190px); }
+.modo-tv .cartao-capa strong { font-size: 1rem; }
+.modo-tv .fileira h2 { font-size: 1.35rem; }
+
+/* D-pad focus: unmistakable focus, without mouse-only hover dependency. */
+.modo-tv :is(button, a, input, [tabindex]):focus-visible {
+  outline: 3px solid var(--hype-accent) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 7px rgba(104,217,199,.14);
+}
+.modo-tv .barra-abas button:focus-visible { outline-offset: 2px !important; }
+.modo-tv .fileira-trilho { scroll-padding-inline: 34px; }
+
+/* Touch-first phone layout */
+@media (max-width: 768px) {
+  .tela { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
+  .tela-com-barra { padding-top: 0; }
+  .heroi {
+    height: clamp(300px, 52svh, 480px);
+    margin: 0 0 1.35rem;
+    align-items: flex-end;
+  }
+  .heroi-vinheta {
+    background:
+      linear-gradient(0deg, var(--hype-bg) 0%, rgba(8,10,13,.82) 24%, rgba(8,10,13,.12) 78%),
+      linear-gradient(90deg, rgba(8,10,13,.24), transparent 85%);
+  }
+  .heroi-texto { padding: 0 18px 1.7rem; max-width: 100%; }
+  .heroi h1 { font-size: clamp(1.8rem, 8vw, 2.65rem); }
+  .heroi p { font-size: .85rem; -webkit-line-clamp: 3; }
+  .heroi-acoes { gap: 8px; margin-top: .9rem; }
+  .heroi-botao { height: 42px; padding: 0 16px; font-size: .86rem; }
+  .fileira { margin-bottom: 1.55rem; }
+  .fileira > header { padding: 0 16px; margin-bottom: .55rem; }
+  .fileira h2 { font-size: 1.03rem; }
+  .fileira-trilho { gap: 10px; padding: 5px 16px 10px; }
+  .cartao-capa { width: 116px; gap: 5px; }
+  .cartao-capa-img { border-radius: 8px; }
+  .cartao-capa strong { font-size: .77rem; }
+  .cartao-capa small { font-size: .68rem; }
+  .cartao-largo { flex-basis: 184px; border-radius: 10px; }
+  .generos-atalhos { padding: 0 16px; margin-bottom: 1.2rem; }
+  .navegacao-mobile {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
+    background: rgba(10,13,16,.96);
+    border-top: 1px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  .navegacao-mobile-item { min-height: 54px; gap: 4px; font-size: 10px; color: #8e99a3; }
+  .navegacao-mobile-item.ativa { color: var(--hype-accent); background: rgba(104,217,199,.08); }
+  .navegacao-mobile-item.ativa svg { color: var(--hype-accent); }
+}
+
+@media (max-width: 380px) {
+  .cartao-capa { width: 104px; }
+  .navegacao-mobile-item { font-size: 9px; }
+  .navegacao-mobile-item svg { width: 20px; height: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartao-capa-img, .cartao-largo, .heroi-botao { transition: none !important; }
+}

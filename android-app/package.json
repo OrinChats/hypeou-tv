@@ -1,0 +1,11 @@
+{
+  "name": "hypeou-tv-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Casca Android (celular, tablet, Android TV, TV Box) do Hypeou TV",
+  "dependencies": {
+    "@capacitor/android": "6.2.0",
+    "@capacitor/cli": "6.2.0",
+    "@capacitor/core": "6.2.0"
+  }
+}

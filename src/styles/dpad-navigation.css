@@ -1,0 +1,376 @@
+/* ============================================================
+   NAVEGAÇÃO POR CONTROLE REMOTO — Hypeou TV
+   ------------------------------------------------------------
+   Um único padrão de destaque para o app inteiro. O foco é
+   desenhado com contorno (outline) + halo (box-shadow), que não
+   mudam o tamanho do elemento e por isso não deslocam o layout.
+   O anel interno (inset) garante que o item continue marcado
+   mesmo quando um contêiner com overflow corta o contorno.
+   ============================================================ */
+
+:root {
+  --foco-cor: #a855f7;
+  --foco-cor-2: #22d3ee;
+  --foco-cor-rgb: 168, 85, 247;
+  --foco-2-rgb: 34, 211, 238;
+  --foco-espessura: 3px;
+  --foco-halo: 24px;
+  --foco-escala-card: 1.05;
+  --foco-transicao: box-shadow 0.12s ease, outline-color 0.12s ease, transform 0.12s ease;
+}
+
+/* Nada de outline nativo brigando com o nosso anel — mas o teclado do
+   computador continua vendo onde está (por :focus-visible). */
+[data-focusable="true"] {
+  transition: var(--foco-transicao);
+}
+
+/* Elemento focado pelo controle (classe posta pelo DpadContext). */
+.dpad-focused,
+[data-focused="true"] {
+  outline: var(--foco-espessura) solid var(--foco-cor) !important;
+  outline-offset: 2px;
+  border-radius: inherit;
+  box-shadow:
+    0 0 0 6px rgba(var(--foco-cor-rgb), 0.28),
+    0 0 var(--foco-halo) rgba(var(--foco-cor-rgb), 0.55),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.55) !important;
+  position: relative;
+  z-index: 5;
+}
+
+/* Teclado/mouse no computador: o mesmo anel, só em :focus-visible. */
+[data-focusable="true"]:focus-visible,
+button:focus-visible,
+a[href]:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible {
+  outline: var(--foco-espessura) solid var(--foco-cor);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   MODO TV: alvos maiores, destaque mais forte, nada de hover
+   ============================================================ */
+
+.modo-tv .dpad-focused,
+.modo-tv [data-focused="true"] {
+  outline-width: 4px;
+  outline-color: #c4b5fd;
+  box-shadow:
+    0 0 0 7px rgba(var(--foco-cor-rgb), 0.35),
+    0 0 34px rgba(var(--foco-cor-rgb), 0.75),
+    0 0 12px rgba(var(--foco-cor-2-rgb), 0.45),
+    inset 0 0 0 3px rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Cards ganham um crescimento discreto, a partir do centro. */
+.modo-tv .cartao-capa.dpad-focused,
+.modo-tv .cartao-largo.dpad-focused,
+.modo-tv .vod-card-poster.dpad-focused,
+.modo-tv .vod-card-secao.dpad-focused,
+.modo-tv .mode-card.dpad-focused,
+.modo-tv .category-card.dpad-focused {
+  transform: scale(var(--foco-escala-card));
+  transform-origin: center;
+  z-index: 6;
+}
+
+/* Linhas de canal e pílulas não crescem: a lista ficaria tremendo. */
+.modo-tv .painel-linha-canal.dpad-focused,
+.modo-tv .painel-pilula.dpad-focused,
+.modo-tv .painel-menu-item.dpad-focused,
+.modo-tv .painel-submenu-item.dpad-focused {
+  transform: none;
+}
+
+/* ============================================================
+   TV: tipografia e alvos à distância de três metros
+   ============================================================ */
+
+.modo-tv .painel-de-canais-container {
+  width: 560px;
+  top: 92px;
+  left: 28px;
+  padding: 22px;
+  gap: 14px;
+}
+
+.modo-tv .painel-de-canais-container.mobile-inline {
+  width: 100%;
+  left: auto;
+  top: auto;
+  padding: 12px 14px 0;
+}
+
+.modo-tv .painel-titulo { font-size: 34px; }
+.modo-tv .painel-numero-ativo,
+.modo-tv .painel-contagem-total { font-size: 22px; }
+.modo-tv .painel-btn-fechar { width: 40px; height: 40px; }
+.modo-tv .painel-btn-fechar svg { width: 18px; height: 18px; }
+
+.modo-tv .painel-busca-box { padding: 12px 16px; }
+.modo-tv .painel-busca-input { font-size: 19px; }
+.modo-tv .painel-busca-icone { width: 20px; height: 20px; }
+
+.modo-tv .painel-pilulas-scroll { gap: 10px; }
+.modo-tv .painel-pilula {
+  padding: 10px 20px;
+  font-size: 17px;
+  border-radius: 999px;
+}
+
+.modo-tv .painel-grupo-titulo { font-size: 14px; letter-spacing: 1.6px; padding: 14px 0 6px 8px; }
+.modo-tv .painel-linha-canal { padding: 12px 10px; gap: 14px; border-radius: 16px; }
+.modo-tv .painel-canal-numero { width: 38px; font-size: 19px; }
+.modo-tv .painel-canal-nome { font-size: 21px; }
+.modo-tv .painel-canal-programa { font-size: 15px; }
+.modo-tv .painel-btn-estrela { opacity: 0.65; padding: 8px; }
+.modo-tv .painel-btn-estrela svg { width: 24px; height: 24px; }
+.modo-tv .painel-btn-estrela.dpad-focused { opacity: 1; }
+.modo-tv .painel-rodape { font-size: 13px; }
+
+/* A estrela do favorito fica sempre à vista na TV (não existe hover). */
+.modo-tv .painel-linha-canal .painel-btn-estrela,
+.modo-tv .painel-linha-canal:focus-within .painel-btn-estrela {
+  opacity: 0.7;
+}
+.modo-tv .painel-linha-canal.dpad-focused .painel-btn-estrela,
+.modo-tv .painel-linha-canal.no-ar .painel-btn-estrela {
+  opacity: 1;
+}
+
+/* O submenu de fontes abre no hover; na TV ele fica aberto dentro do menu. */
+.modo-tv .painel-submenu {
+  display: flex;
+  position: static;
+  margin: 4px 0 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: none;
+  box-shadow: none;
+  min-width: 0;
+}
+.modo-tv .painel-menu-contexto { min-width: 260px; padding: 8px; }
+.modo-tv .painel-menu-item,
+.modo-tv .painel-submenu-item { font-size: 16px; padding: 12px 14px; }
+
+/* ------------------------------------------------------------------
+   TV: o que é de mouse/decoração sai da frente do controle remoto
+   ------------------------------------------------------------------ */
+
+/* Barra do celular e abas promocionais (Baixar app) não existem na TV. */
+.modo-tv .navegacao-mobile,
+.modo-tv [data-promo="1"],
+.modo-tv .dica-app,
+.modo-tv .aviso-app,
+.modo-tv .aviso-app-botao,
+.modo-tv .aovivo-fab,
+.modo-tv .stream-tester-fab {
+  display: none !important;
+}
+
+/* Volume deslizante e sliders prendem as setas: na TV o volume é o da TV. */
+.modo-tv .volume-slider-mac,
+.modo-tv .volume-control-mac input[type="range"],
+.modo-tv .settings-slider,
+.modo-tv .video-player-container input[type="range"] {
+  display: none !important;
+}
+
+/* Botões que só servem com mouse (transmitir, PiP, tela cheia do player):
+   no app da TV a tela já é cheia. Continuam existindo no site. */
+.modo-tv .video-player-container [title^="Transmitir"],
+.modo-tv .video-player-container [title^="Picture in Picture"],
+.modo-tv .video-player-container [title^="Tela cheia"],
+.modo-tv .video-player-container [title^="Sair da tela cheia"] {
+  display: none !important;
+}
+
+/* Coração de remover favorito só aparecia no hover. */
+.modo-tv .grade-tirar,
+.modo-tv .grade-tirar:focus-visible {
+  opacity: 1 !important;
+}
+
+/* Elementos que só aparecem ao passar o mouse em cartões: na TV ficam visíveis. */
+.modo-tv .cartao-capa .cartao-capa-acoes,
+.modo-tv .vod-card-poster .vod-badge-favorito {
+  opacity: 1;
+}
+
+/* ============================================================
+   Controles do player (Ao vivo e filmes)
+   ============================================================ */
+
+.modo-tv .video-player-container .control-btn.dpad-focused,
+.modo-tv .video-player-container .control-btn-icon.dpad-focused,
+.modo-tv .movie-player .control-btn.dpad-focused,
+.modo-tv .movie-player .control-btn-icon.dpad-focused {
+  outline-color: #ffffff;
+  transform: scale(1.12);
+  z-index: 10;
+}
+
+/* O vídeo é o "palco" do player, não um botão: nada de borda de seleção nele.
+   O filme/série abre já com o foco no palco, então nenhum botão fica marcado
+   sem a pessoa ter navegado até ele. */
+.modo-tv [data-dpad-palco],
+.modo-tv [data-dpad-palco]:focus,
+.modo-tv [data-dpad-palco]:focus-visible,
+.modo-tv [data-dpad-palco].dpad-focused,
+[data-dpad-palco]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ============================================================
+   Rolagem: o item focado precisa ficar inteiro à vista
+   ============================================================ */
+
+[data-focusable="true"],
+.dpad-focused {
+  scroll-margin: 16px;
+}
+
+/* Nas telas com a barra fixa do topo, o item focado não para embaixo dela. */
+.tela-com-barra [data-focusable="true"],
+.tela-com-barra .dpad-focused,
+.vod-catalog [data-focusable="true"] {
+  scroll-margin-top: 90px;
+}
+
+/* Dentro da lista de canais quem manda é o painel: margem pequena. */
+.painel-lista-rolagem [data-focusable="true"],
+.painel-lista-rolagem .dpad-focused {
+  scroll-margin-top: 10px;
+  scroll-margin-bottom: 10px;
+}
+
+.modo-tv .painel-lista-rolagem {
+  scroll-padding-top: 8px;
+  scroll-padding-bottom: 12px;
+}
+
+.modo-tv .fileira-trilho,
+.modo-tv .vod-fileira-trilho,
+.modo-tv .vod-episodios-trilha {
+  scroll-padding-inline: 20px;
+}
+
+/* ============================================================
+   Dica de navegação (aparece na primeira tecla do controle)
+   ============================================================ */
+
+.dpad-navigation-hint {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(8, 10, 16, 0.86);
+  padding: 12px 22px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 9999;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  animation: hintFadeIn 0.2s ease forwards;
+}
+
+@keyframes hintFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dpad-navigation-hint .hint-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.9rem;
+}
+
+.dpad-navigation-hint .hint-key {
+  background: rgba(255, 255, 255, 0.16);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.dpad-navigation-hint.auto-hide {
+  animation: hintFadeIn 0.2s ease forwards, hintFadeOut 0.3s ease forwards 5s;
+}
+
+@keyframes hintFadeOut {
+  to { opacity: 0; pointer-events: none; }
+}
+
+/* ============================================================
+   Voltar na tela inicial: confirmação antes de fechar o app
+   ============================================================ */
+
+.aviso-saida-tv {
+  position: fixed;
+  left: 50%;
+  bottom: 9%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  background: rgba(16, 18, 26, 0.96);
+  color: #fff;
+  font: 600 26px/1.3 system-ui, sans-serif;
+  padding: 18px 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65);
+  max-width: 80vw;
+  text-align: center;
+}
+
+.aviso-saida-tv b { color: #c4b5fd; }
+
+/* ============================================================
+   Desabilitado e movimento reduzido
+   ============================================================ */
+
+[data-focusable="true"][disabled],
+[data-focusable="true"][data-disabled="true"],
+[data-focusable="true"].disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-focusable="true"],
+  .dpad-focused,
+  .modo-tv .dpad-focused {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================================
+   TV: desempenho (TVs fracas com Chromium antigo)
+   ============================================================ */
+
+.modo-tv * {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.modo-tv .painel-de-canais-container {
+  background: rgba(11, 14, 20, 0.98) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8) !important;
+}
+
+.modo-tv .vod-sub-barra {
+  background: rgba(18, 20, 34, 0.98) !important;
+}
+
+.modo-tv .barra-topo-container,
+.modo-tv .barra-topo {
+  background: rgba(11, 14, 20, 0.98) !important;
+}

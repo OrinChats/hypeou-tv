@@ -1,0 +1,7 @@
+Para regenerar os catálogos a partir de playlists atualizadas, coloque nesta pasta os dois arquivos com estes nomes exatos:
+- CanaisBR02.m3u8
+- Filmes-Series.m3u8
+
+Depois execute `npm run build`. Os arquivos grandes de origem não são necessários para a execução normal do site: os catálogos prontos já estão em public/listas e public/vod.
+
+A playlist de canais gerada mantém apenas URLs terminadas em .ts ou .m3u8. A lista VOD é indexada e dividida em arquivos pequenos por letra e episódios para não baixar os 85 MB inteiros no navegador.

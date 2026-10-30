@@ -1,0 +1,16 @@
+{
+  "appId": "com.hypeou.tv",
+  "appName": "Hypeou TV",
+  "webDir": "www",
+  "backgroundColor": "#05060d",
+  "server": {
+    "url": "https://hypeoutv.vercel.app",
+    "cleartext": true,
+    "androidScheme": "https",
+    "allowNavigation": ["*"]
+  },
+  "android": {
+    "allowMixedContent": true,
+    "webContentsDebuggingEnabled": false
+  }
+}

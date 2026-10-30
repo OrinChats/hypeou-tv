@@ -1,0 +1,814 @@
+O Acampamento de Lazlo		0	53
+O Advogado de Divórcio		0	12
+O Agente Divino		0	8
+O Agente Noturno		0	30
+O Alienista		0	18
+O Amanha e Eu		0	4
+O Amor Comeca no Mundo do E Se [L]		0	6
+O Amor da Minha Vida - Hayatimin Aski [L]		0	17
+O Amor e Melhor na Segunda Vez		0	6
+O Amor faz voce chorar - Aşk Ağlatır [L]		0	16
+O Amor Invencível		0	80
+O Amor Mora ao Lado		0	16
+O Amor Não Entende Palavras		0	31
+O Amor Nao Tem Mitos (2026) [L]		0	21
+O Amor Nao Tem Receita - El Amor no Tiene Receta [MEX]		0	28
+O Amor Perdura (2024) [L]		0	32
+O Amor Pode Ser Traduzido		0	12
+O Amor Que Me Da [L]		0	28
+O Amor Tem Fogos de Artifício (2026) [L]		0	36
+O Amor Volta para Casa		0	12
+O Ancião - Baba [L]		0	30
+O Anti Heroi [L]		0	10
+O Aquario		0	20
+O Aroma do Tempo [L]		0	30
+O Arsenal dos Espiões		0	8
+O Artista		0	6
+O Assalto		0	3
+O Assassinato de Jill Dando		0	3
+O Assassinato de Yara Gambirasio		0	5
+O Assassinato do Ator Rafael Miguel		0	3
+O Assassino Confesso		0	5
+O Assassino da Capa de Chuva Caça ao Serial Killer Coreano		0	3
+O Assassino de Valhalla		0	8
+O Assassino do Rio Green Caca Ao Monstro		0	4
+O Assassino do TikTok		0	2
+o Assassino do Zodíaco		0	4
+O Assassino Midiático		0	10
+O Ataque de Ciragan - Çırağan Baskını [L]		0	4
+O Atentado ao Voo Pan Am 103		0	6
+O Atirador		0	31
+O Auto da Compadecida		0	4
+O Baba		0	26
+O Bebê		0	8
+O Beijo da Sereia		0	12
+O Beijo do Destino		0	12
+O Beijo do Vampiro		0	215
+O Bem Amado		0	177
+O Bicho Vai Pegar O Chamado da Natureza		0	8
+O Blefe de 1 Milhão		0	10
+O Blefe de 1 Milhão!		0	10
+O Bom Doutor [L]		0	20
+O Bombeiro Sam		0	26
+O Bonde		0	16
+O Bosque		0	6
+O Bravo e a Bela		0	32
+o Caçador de Magia		0	10
+O Cafetão		0	6
+O Caminho Estreito para os Confins do Norte		0	5
+O Caminho para o Sucesso		0	30
+O Caminho para o Sucesso (2026) [L]		0	1
+O Cangaceiro do Futuro		0	7
+O Canto do Passaro		0	331
+O Canto Livre de Nara Leão		0	5
+O Caozinho Esperto		0	13
+O Capuz - Kopuk [L]		0	5
+o Carneiro		0	138
+O Cartel da Marmita		0	7
+O Casal da Casa ao Lado		0	11
+O Casal Perfeito		0	6
+O Caso Asunta		0	6
+O Caso Celso Daniel		0	8
+O Caso do Chefe - Uma Questao de Honra - Seref Meselesi [L]		0	26
+O Caso Escola Base		0	4
+O Caso Evandro		0	9
+O Caso Outreau Um Pesadelo Frances		0	4
+O Caso Robinho		0	4
+O Caso Sherri Papini		0	4
+O Cativeiro - Esaret [L]		0	557
+O Cavaleiro dos Sete Reinos		0	6
+O Cavalheiro - Delikanli [L]		0	7
+O Cavalo Amarelo		1	3
+O Cerco de Waco		1	3
+O Chefe da Casa		1	56
+O Chefinho De Volta ao Berço		1	28
+O Chefinho De Volta aos Negócios		1	37
+O Circo da Paixao		1	8
+O Circulo		1	61
+O Circulo - Halka [L]		1	19
+O Circulo Secreto		1	22
+O Clone		1	221
+O Clube - The club - Kulup [DUB]		1	20
+O Clube - The Club [L]		1	6
+O Clube da Meia-Noite		1	10
+O Clube das Babás		1	18
+O Clube das Coisas Mágicas		1	40
+O Clube das Divorciadas		1	29
+O Clube dos Amigos Secretos [L]		1	12
+O Clube dos Graves		1	10
+O Codigo Bill Gates		1	3
+o Coelhinho Perdido		1	4
+O Colapso		1	1
+O Conde de Monte Cristo		1	8
+O Consultor		1	8
+O Continental Do Mundo de John Wick		1	3
+O Conto Da Aia		1	66
+O Conto da Raposa de Nove Caudas [L]		1	29
+O Conto da Senhora Ok		1	16
+O Conto da Senhora Ok [L]		1	14
+O Coro Sucesso Aqui Vou Eu!		1	10
+O Coro_ Sucesso Aqui Vou Eu		1	10
+O Corredor da Morte		1	4
+O Cravo e a Rosa		1	220
+O Crime do Padre Amaro [PT-PT]		1	6
+O Crime do Século		1	2
+O Cristal Encantado A Era Da Resistencia		1	10
+O Crush Perfeito		1	6
+O Cuco de Cristal		1	6
+O Culto da Morte O Caso Andrea Yates		1	3
+O Curandeiro [L]		1	20
+O Curioso Caso de		1	14
+O Curioso Caso de Natalia Grace		1	16
+O Curioso Mundo de James		1	20
+O Degelo		1	12
+O Dentista Mascarado		1	12
+O Desaparecimento de Birgit Meier		1	4
+O Desastre de Chernobyl		1	3
+O Desconhecido Mundo Animal		1	12
+O Despertar das Tartarugas Ninja		1	26
+O Destino do Amor (2026) [L]		1	8
+O Detetive das Sombras		1	16
+O Dia de Amanhã		1	5
+O Dia Depois da Eleição		1	5
+O Dia Do Chacal		1	10
+O Dia Em Que A Minha Vida Mudou		1	20
+O Diabo em Ohio		1	8
+O Diagnóstico		1	10
+O Dilema de Suzie		1	11
+O Diretor Nu		1	8
+O DNA da Justiça		1	9
+O Documentário		1	5
+O Domo de Vidro		1	6
+O Dono de Kingstown		1	40
+O Dono do Lar		1	140
+O Dono do Mundo		1	197
+O Doutrinador A Série		1	7
+O Eleito		1	6
+O Ensaio		1	11
+O Escandalo de Chunhwa [L]		1	10
+O Escolhido		1	12
+O Espantalho (2026) [L]		1	12
+O Espiao		1	6
+O Estado de Leyla - O Jeito de Leyla - Leyla Hali [L]		1	1
+O Estrangulador de HillsideO Estrangulador de Hillside		1	4
+O Estranho Retorno de Diana Salazar		1	8
+O Estudio		1	10
+O Estudio da Meia Noite (2024) [L]		1	16
+o ETeimoso		1	100
+O Eternauta		1	6
+O Exército Esquecido		1	5
+O Exorcista		1	20
+O Experimento Americano		2	5
+O Exterminador do Futuro As Cronicas de Sarah Connor		2	30
+O Extraordinário Observador de Pássaros com Christian Cooper		2	6
+O Extraordinario Territorio da Escandinavia		2	5
+O Falcão do Golfe		2	10
+O Falsificador - Kalpazan [L]		2	8
+O Falsificador Mórmon		2	3
+O Famoso Alfaiate		2	23
+O Famoso Alfaiate [L]		2	23
+O Fantasma Do Metro [L]		2	16
+O Fantasma Escritor		2	7
+o Fantasminha		2	3
+O Fantástico Jaspion		2	46
+O Fantastico Mundo do Cao da Pradaria		2	12
+O Farejador		2	32
+O Faz Nada		2	5
+O Filho Bastardo do Diabo		2	8
+O Fim da Beleza		2	3
+O fim da geada e o sol - Ayazın Sonu Güneş [L]		2	75
+O Fim da Infancia		2	3
+O Fim do Amor		2	10
+O Fim do Mundo Com Você [L]		2	8
+O Fogo dentro de Nós - İçimizdeki Ateş [L]		2	5
+O Futuro		2	12
+O Futuro de Bill Gates		2	5
+O Gabinete de Curiosidades de Guillermo Del Toro		2	8
+O Gambito da Rainha		2	7
+O Garoto de Cada Dia [L]		2	7
+O Genio - Deha [DUB]		2	96
+O Gerente da Noite		2	12
+O Gerente Noturno		2	6
+O Golpe do Amor		2	6
+o Gorila		2	31
+O Grande Gonzalez		2	10
+O Grande Guerreiro Otomano		2	448
+O Grande Guerreiro Otomano [L]		2	448
+O Grande Sultao [DUB]		2	310
+O Grifo		2	6
+O Grito das Mariposas		2	13
+O Guardiao [L]		2	32
+O Guia Pratico do Amor [L]		2	12
+O Herdeiro - Veliaht [L]		2	26
+O Herdeiro Impossivel [L]		2	12
+O Homem Certo - O Cara Real - Esas Oglan		2	8
+O Homem com Mil Filhos		2	3
+O Homem das Castanhas		2	12
+O Homem do Castelo Alto		2	40
+O Homem Inocente [L]		2	20
+O Hospital		2	18
+O Idiota Favorito de Deus		2	8
+O Idolo Celestial [L]		2	12
+O Iluminado		2	3
+O Ima - the Imam [L]		2	31
+O Imperador de Ocean Park		2	10
+O Imperdoavel - Lo Imperdonable [MEX] [ESPANHOL]		2	120
+O Império - The Empire [L]		2	7
+O Império dos Chimpanzés		2	4
+O Imperio Elegante [L]		2	105
+O Impostor		2	8
+O Incidente de Darwin		2	13
+O Incrivel Circo Digital		2	9
+O Incrível Hulk		2	82
+O Incrível Mundo de Gumball		2	221
+O Indice do Medo		2	4
+O Indomável - Amor Sem Limites		2	181
+O Indomável - Amor Sem Limites [L]		2	63
+O Indomavel Amor Sem Limites		2	144
+O Inferno São as Pessoas (2019) [L]		2	10
+O Inocente		2	8
+O Instituto		2	8
+O Internato Las Cumbres		2	16
+O Isqueiro e o vestido da Princesa [L]		2	38
+O Jardim de Bronze		2	24
+O Jardim dos Esquecidos A Origem		2	4
+O Jardim Secreto - Gizli Bahce [L]		2	6
+O Jardineiro		2	6
+O Jeito Apropriado de Escrever Amor [L]		2	1
+O Jeito Que Voce Brilha [L]		2	24
+O Jogador 2 Entre Golpistas [L]		2	12
+O Jogo da Fama		2	8
+O Jogo da Morte		3	8
+O Jogo da Morte [L]		3	8
+O Jogo da Piramide		3	10
+O Jogo da Piramide [L]		3	9
+O Jogo da Vida - Tozluyaka [L]		3	18
+O Jogo do Diabo		3	24
+O Jogo Inglês		3	6
+O Jogo Que Mudou A Historia		3	10
+O Jovem Papa		3	10
+O Jovem Wallander		3	12
+O Laboratório de Dexter		3	51
+O Lado Obscuro da Fama		3	22
+O Lado Obscuro dos Anos 80		3	16
+O Lado Sombrio da TV Infantil		3	5
+O Lado Sombrio de Hollywood		3	8
+O Lago		3	16
+O Legado - Emanet [L]		3	803
+O Legado de Júpiter		3	8
+O Legado Dos Anos 90		3	2
+O Leopardo		3	6
+O Livro de Boba Fett		3	7
+O Lobista		3	10
+O Maestro e o Mar		3	19
+O Maior Roubo de Arte de Todos os Tempos		3	4
+O Mal na sua Essencia A Historia de Hadden Clark		3	5
+O Manipulado		3	12
+O Mapa dos Desejos		3	6
+O Mar da Tranquilidade		3	8
+O Mar La Fora		3	50
+O Mar no Meu Coração		3	111
+O Mar no Meu Coração - Sen Anlat Karadeniz [L]		3	99
+O Mar no Meu Coração [L]		3	64
+O Marido		3	12
+O Marido (2026) [L]		3	12
+O Marido do Meu Irmao [L]		3	3
+O Marinheiro Popeye		3	440
+O Mecanismo		3	16
+O Medico da Familia - The Town Doctor - Kasaba Doktoru [DUB]		3	32
+O Melhor de Mexicanicos		3	10
+O Melhor Dia da Minha Vida [L]		3	14
+O Melhor Do Chespirito		3	8
+O Melhor Infarto da Minha Vida		3	6
+O Menino Maluquinho		3	26
+O Menino que nao vai para o Ceu (2026) [L]		3	6
+O Mentalista		3	151
+O Mentiroso - Yalancı [L]		3	7
+O Método Kominsky		3	8
+O Meu Pai é um Caçador de Recompensas		3	18
+O Meu Pai é um Caçador de Recompensas!		3	18
+O Misteio da Rota 20		3	3
+O Misterio da Fazenda Blind Frog		3	28
+O Misterio da Rota 20		3	3
+O Mistério das Mortes de Burari		3	3
+O Mistério de Chapelwaite		3	10
+O Misterio de Midwich		3	7
+O Misterio de Varginha		3	3
+O Mistério do Pico Victorio		3	6
+O Mistério do Triângulo das Bermudas		3	8
+O Misterioso Mundo dos Sons com David Attenborough		3	3
+O Misterioso Triangulo do Alasca		3	20
+O Mito de Sísifo		3	16
+O Monstro de Florenca		3	4
+O Monstro em Mim		3	8
+O Mundo de Beakman		3	26
+O Mundo de Greg		3	173
+O Mundo de Karma		3	15
+O Mundo dos Animais		3	6
+O Mundo dos Casados		3	16
+O Mundo dos Centauros		3	10
+O Mundo é dos Jovens		3	151
+O Mundo E Um Teatro [L]		3	11
+O Mundo Maravilhosamente Estranho de Gumball		3	29
+O Mundo Maravilhoso de Mickey Mouse		3	20
+O Mundo Perdido		3	66
+O Mundo Segundo Jeff Goldblum		3	12
+O Mundo Sem Filtro de Any Malu		3	10
+O Mundo Sombrio De Sabrina		3	35
+O Museu da Inocencia		3	9
+O Namorado		3	25
+O Natal dos Silva		3	5
+O Naufragio do Heweliusz		4	5
+O Negociador		4	8
+O Negócio		4	51
+O Nevoeiro		4	10
+O Ninho Futebol e Tragedia		4	3
+O Noivo Perfeito - Sahane Damat [L]		4	8
+O Nome da Rosa		4	8
+O Nome e Felicidade - Adi Mutluluk [DUB]		4	30
+O Nome é Felicidade - Adı Mutluluk [L]		4	17
+O Novato Renascido (2026) [L]		4	12
+O Novo Papa		4	9
+O Novo Show do Pica-Pau		4	112
+O Ônibus Mágico Decola Novamente		4	26
+O Otomano - Kurulus Osman		4	99
+O Otomano - Kurulus Osman [L]		4	194
+O Otomano - Kurulus Osman [OPÇÃO 02] [DUB]		4	206
+O Ouro		4	6
+O Outro Lado do Amor		4	104
+O Outro Lado do Paraíso		4	172
+O Paciente		4	10
+O Pacífico		4	10
+O Pai da Minha Filha		4	10
+O Pai de Menina - Kız Babası [L]		4	8
+O Pais de Tanabata		4	10
+O Palacio Assombrado [L]		4	16
+O Paraíso e a Serpente		4	8
+O Pequeno Furry		4	78
+O Pequeno Scooby Doo		4	27
+O Pequeno Urso		4	64
+O Peso da Gloria		4	7
+O Picapau Amarelo		4	25
+O Píer		4	16
+O Piloto Invisível		4	3
+o Pimentinha		4	13
+O Pior do Mal [L]		4	12
+O Plano de Ressurreicao		4	9
+O Plano é Esse		4	6
+O Poder		4	9
+O Poder de Hitler		4	3
+O Poder e a Lei		4	40
+O Poligamo		4	22
+O Portal do Ollie		4	26
+O Prazer e Meu		4	4
+O Preco da Confissao		4	12
+O Preco da Paixao - Siyah Beyaz Ask [DUB]		4	96
+O Preco da Paixao - Siyah Beyaz Ask [L]		4	32
+O Preço da Perfeição		4	10
+O Preco do Silencio [L]		4	1
+O Predador de Sevilha		4	3
+O Presidente da Minha Escola [L]		4	12
+O Pretendente Perfeito		4	36
+O Pretendente Perfeito [L]		4	36
+O Primo Basilio		4	16
+O Principe - The Prince - Prenz [DUB]		4	23
+O Príncipe Dragão		4	63
+O Privilégio de Amar [MEX]		4	154
+O Problema dos 3 Corpos		4	8
+O Professor		4	18
+O Profeta		4	177
+O Programa 90 Dias Longe das Drogas		4	6
+O Programa A Industria dos Internatos Abusivos		4	3
+O Proximo Empreendedor com Gordon Ramsay		4	20
+O Proximo Grande Chef		4	6
+O psiquiatra ao lado		4	8
+O Que a Vida Me Roubou		4	157
+O Que a Vida Me Roubou [MEX]		4	157
+O Que Estou Comendo Com Zooey Deschanel		4	6
+O Que Fazemos nas Sombras		4	61
+O Que Houve com a Secretaria Kim [L]		4	16
+O Que Querem As Mulheres		4	4
+O Que Tem na Caixa		4	6
+O que um amante não faz - Seven Ne Yapmaz [L]		4	11
+O Que Você Não Sabia Sobre o Humor Brasileiro		4	6
+O Quinteto		4	119
+O Quinto dos Infernos		4	47
+O Rancho		4	80
+O Rastreador		4	55
+O Rato		4	10
+O Rebu		4	36
+O Refugio		4	6
+O Refugio Atomico		5	8
+O Regime		5	6
+O Rei da Pesca		5	10
+O Rei da TV		5	16
+O Rei de Porcelana		5	20
+O Rei do Bairro		5	207
+O Rei do Gado		5	209
+O Rei do Gado (Vale a Pena Ver de Novo)		5	150
+O Rei do Inverno		5	10
+O Rei do Pedaço		5	88
+O Rei dos Pneus		5	6
+O Rei Eterno		5	16
+O Reino Perdido dos Piratas		5	6
+O Relogio da Aventura		5	5
+O Renovador		5	8
+O Repatriado		5	10
+O Repórter do Poder		5	4
+O Resgate na Caverna Tailandesa		5	6
+O Residente		5	107
+O Resort Zoobak		5	51
+O Restaurante da Bruxa (2021) [L]		5	8
+O Retorno da Rainha [L]		5	24
+O Retorno de Simone Biles		5	4
+O Retorno do Juiz [L]		5	14
+O Rico e Lázaro		5	181
+O Ringue		5	5
+O Roubo		5	6
+O Sabor do Destino		5	17
+O Sabotador		5	20
+O Salvador da Pátria		5	184
+O Sangue de Zeus		5	24
+O Segredo da Família Greco		5	9
+O Segredo das Baleias		5	4
+O Segredo das Coisas		5	104
+O Segredo de Feriha		5	174
+O Segredo de Feriha [L]		5	62
+O Segredo de Um Milhao de Dolares		5	16
+O Segredo de Widows Bay		5	10
+O Segredo do Comissario - Innocent - Masum [DUB]		5	8
+O Segredo do Rancho Skinwalker		5	58
+O Segredo do Rio		5	8
+O Segredo do Templo		5	24
+O Segredo do Templo - Atiye [DUB]		5	24
+O Segundo Melhor Hospital da Galaxia		5	8
+O Senhor das Moscas		5	4
+O Senhor dos Anéis Os Anéis de Poder		5	16
+O Sequestro do Voo 601		5	6
+O Sétimo Guardião		5	161
+O Sexo dos Anjos		5	6
+O Show da Luna		5	209
+O Show de Tom e Jerry		5	324
+O Show de Varnell Hill		5	3
+O Show do Garfield		5	26
+O Show do Patrick Estrela		5	63
+O Show do Sábado		5	8
+O Show do Scooby Doo		5	40
+O Show dos Looney Tunes		5	52
+O Show dos Tubaroes Babies		5	12
+O Símbolo Perdido de Dan Brown		5	10
+O Simpatizante		5	7
+O Sinal		5	4
+O Socio		5	106
+O Som da Magia		5	6
+O Som e a Silaba		5	8
+O Sorriso Deixou Seus Olhos [L]		5	16
+O Submarino		5	7
+O Submundo das Apostas		5	8
+O Sucessor		5	23
+O Tatuador de Auschwitz		5	6
+O Taxista		5	101
+O Teatro das Tesouras		5	8
+O Tempo ao Seu Lado		5	8
+O Tempo ao Seu Lado - Ilk ve Son [DUB]		5	12
+O Tempo ao Seu Lado - Ilk ve Son [L]		5	19
+O Tempo das Moscas		5	6
+O Tempo e o Vento		5	26
+O Tempo Entre Costuras		5	17
+O Tempo Que Te Dou		5	10
+O Tempo Traz Você pra Mim		5	12
+O Terráqueo		5	16
+O Terremoto do Everest		6	3
+O Testamento O Segredo de Anita Harley		6	5
+O Tio de Outro Mundo		6	13
+O Toque Do Silencio		6	6
+O Traficante		6	10
+O Truque de Black		6	13
+O Túnel Do Tempo		6	30
+O Turista		6	12
+O Ultimato Ou Casa ou Vaza		6	40
+O Ultimato Queer Love		6	20
+O Ultimo Ano de Hitler		6	2
+O Último Cara da Terra		6	66
+O Ultimo Dragão		6	82
+O Último Grande Peixe		6	8
+O Ultimo Guardiao		6	32
+O Ultimo Guardiao - The Protector - Hakan Muhafiz [L]		6	32
+O Ultimo Imortal [L]		6	40
+O Último Navio		6	56
+O Último Ônibus do Mundo		6	10
+O Ultimo Verao		6	93
+O Ultimo Verao - Daai Crazy Somer - Son Yaz [L]		6	26
+O Último Verão - Son Yas [L]		6	80
+O Universo		6	86
+O Universo Misterios Revelados		6	4
+O Urso		6	46
+O Valor Absoluto do Amor		6	16
+O Vazio		6	20
+O Velho Oeste com Kevin Costner		6	8
+O Verão de		6	6
+O Verao em que Hikaru Morreu		6	12
+O Verão Que Mudou Minha Vida		6	26
+O Veu		6	6
+O Vidente		6	80
+O Vigarista Negro [L]		6	11
+O Vilão		6	6
+O! [DUB]		6	8
+O... Coitado		6	39
+O.J. Simpson Verdades Nunca Vistas		6	4
+O11ZE		6	186
+Oasis		6	8
+Obi-Wan Kenobi		6	6
+Objecao - Sakincali [L]		6	5
+Objetos Amaldicoados		6	8
+Objetos Cortantes		6	8
+Ocean Likes Me [L]		6	8
+OceanXplorers		6	6
+October Faction		6	10
+Odd Mom Out		6	30
+Odd Taxi		6	13
+Odo		6	13
+Off Campus Amores Improvaveis		6	8
+Off Road		6	6
+Oficina de Superclassicos		6	18
+Oficina TexMex		6	10
+Oggy e as Baratas Tontas E Piya!		6	13
+Oh My Assistant [L]		6	8
+Oh My Baby [L]		6	16
+Oh My God_Yes Uma Serie de Momentos que Fazem Todo Sentido		6	7
+Oh My God...Yes Uma Serie de Momentos que Fazem Todo Sentido		6	7
+Oh The Mysterious [L]		6	40
+Oi Ninja		6	20
+Ok KO Vamos Ser Herois		6	49
+Oktoberfest Sangue e Cerveja		6	6
+Okura Casos Esquecidos [L]		6	10
+Ola Meus 20 Anos (2016) [L]		6	26
+Olá Sou Eu!		6	16
+Old Fashion Cupcake [L]		6	5
+Olhar de Mulher - Mirada de Mujer [MEX]		6	120
+Olhar Indiscreto		6	10
+Olhe nos Meus Olhos [L]		6	12
+Olhos Atentos		6	10
+Olhos da Lei		6	32
+Olhos de Wakanda		6	4
+Olhos do Mar Negro - Gozleri Karadeniz [L]		6	16
+Olhos que Condenam		6	4
+Ololade		6	6
+Olympo		6	8
+Omar - Omer [L]		6	54
+Omar [L]‎		6	30
+On My Block		6	38
+Once Again [L]		7	8
+Onda - Donence [L]		7	14
+Onda Boa com Ivete		7	5
+Onda de 100 Pés		7	12
+Onde Esta a Wanda		7	8
+Onde Esta Amy Bradley		7	3
+Onde está Marta del Castillo		7	3
+Onde Está Meu Coração		7	10
+Onde Está Tim Lopes		7	4
+Onde Nascem os Fortes		7	53
+Onde quer que voce esteja - Her Yerde Sen [L]		7	23
+Onde Seus Olhos se Prolongam [L]		7	9
+One Piece		7	940
+ONE PIECE A Série		7	16
+ONE PIECE A Serie Conteudo Extra		7	5
+One Punch Man		7	36
+One Room Angel [L]		7	6
+One Strange Rock		7	10
+One the Woman [L]		7	16
+ONI A Lenda do Deus do Trovão		7	4
+Onimusha		7	8
+Onisciente		7	6
+Onision - Abuso na Internet		7	4
+Onision Abuso na Internet		7	4
+Only Boo [L]		7	12
+Only Murders in the Building		7	50
+Onmyoji		7	13
+Ōoku Por Dentro do Castelo		7	10
+Operacao Alto Mar Estados Unidos		7	12
+Operação Berlim		7	29
+Operacao Big Hero		7	46
+Operação Ecstasy		7	28
+Operacao FBI		7	6
+Operação Fronteira América do Sul		7	20
+Operação Fronteira Brasil		7	108
+Operacao Fronteira Espanha		7	116
+Operacao Fronteira Estados Unidos		7	10
+Operacao Fronteira Italia		7	14
+Operacao Fronteira Suecia		7	14
+Operação Fronteira_ América do Sul		7	12
+Operacao Guerra Verde		7	10
+Operacao Infiltrados		7	6
+Operação Lioness		7	23
+Operação Maré Negra		7	9
+Operação Maré Negra A Travessia Suicida		7	4
+Operação Maré Negra_ A Travessia Suicida		7	4
+Operação Naufrágios		7	10
+Operação Pacífico		7	60
+Operação Pacífico [MEX]		7	60
+Operacao Policial		7	20
+Operação Safed Sagar		7	6
+Operacao Transplante		7	8
+Operação Tyrant (2024) [L]		7	4
+Orange		7	13
+Orange County à Venda		7	16
+Orange Days [L]		7	11
+Orange Is The New Black		7	91
+Orange Marmalade [L]		7	12
+Ordinary Joe		7	13
+Ore dake Haireru Kakushi Dungeon		7	12
+Órfãos da Terra		7	154
+Organização - Teşkilat [L]		7	172
+Organizadora de Casamento - Darısı Başımıza [L]		7	5
+Orgulho Alem da Tela		7	3
+Orgulho e Familia		7	4
+Orgulho e Preconceito		7	6
+Orient		7	24
+Origem		7	40
+Orphan Black		7	50
+Os		7	44
+Os 100		7	100
+Os 13 Fantasmas do Scooby Doo		7	13
+Os 20 dias de Lazaro		7	6
+Os 3 Lá Embaixo Contos da Arcadia		7	26
+Os 39		7	6
+Os 4 Elementos da Terra (2026) [L]		7	16
+Os 7 Ursos		7	10
+Os Abandonados		7	7
+Os Agentes Secretos De Churchill Novos Recrutas		7	5
+Os Apuros de Penélope Charmosa		7	17
+Os Aspones		8	7
+Os Assassinatos de Are		8	5
+Os Assassinatos de Fox Hollow Playground de um Serial Killer		8	4
+Os Assassinatos de Idaho Pesadelo Universitário		8	3
+Os Astronautas		8	10
+Os Auditores [L]		8	12
+Os Ausentes		8	10
+Os Bandidos do Tempo		8	10
+Os Bibliotecários		8	42
+Os Borgias		8	29
+Os Bucaneiros		8	16
+Os Busbys + 5		8	24
+Os Caca Fantasmas		8	98
+Os Cadetes Mech		8	10
+Os Caminhos de Jesus		8	2
+Os Canibais de Baton Rouge		8	4
+Os Caras Malvados No Pedaco		8	19
+Os Casagrandes		8	60
+Os Casos de Harry Hole		8	9
+Os Cavaleiros de Castelcorvo		8	15
+Os Cavaleiros do Zodíaco - Saga do Santuário		8	114
+Os Cavaleiros do Zodíaco A Saga de Hades		8	13
+Os Cavaleiros do Zodiaco Alma de Ouro		8	13
+Os Cavaleiros do Zodíaco Ômega		8	97
+Os Cavaleiros do Zodiaco Saint Seiya		8	30
+Os Cavaleiros do Zodíaco The Lost Canvas		8	26
+Os Celtas A Historia Nao Contada		8	3
+Os Choroes		8	5
+Os Contatinhos de Lauren		8	8
+Os Corretores de Beverly Hills		8	8
+Os Crimes da Nossa Mãe		8	3
+Os Defeituosos [L]		8	8
+Os Desafios de Hailey		8	19
+Os Dez Mandamentos		8	242
+Os Dias Eram Assim		8	88
+Os Dinossauros		8	4
+Os Donos do Jogo		8	8
+OS DOOMIES		8	22
+Os Eleitos		8	8
+Os Empoderados		8	20
+Os Encanadores da Casa Branca		8	5
+Os Enviados		8	16
+Os Escolhidos à Prova De Tudo Com Bear Grylls		8	6
+Os Experientes		8	7
+Os Fantasmas de Devil Perch		8	1
+Os Farad		8	8
+Os Feiticeiros Alem de Waverly Place		8	35
+Os Feiticeiros de Waverly Place		8	106
+Os Filhos de Sam Loucura e Conspiração		8	4
+Os Fios do Passado - Los Hilos del Pasado [MEX] [ESPANHOL]		8	60
+Os Flintstones		8	134
+Os Franceses		8	10
+Os Gigantes		8	2
+Os Goldbergs		8	185
+Os Golpistas de Toquio		8	7
+Os Grandes Seljucidas - Uyanış Büyük Selçuklu [L]		8	34
+Os Grandiosos Irmãos Robôs		8	10
+Os Guardioes da Nacao		8	6
+Os Guerreiros Wasabi		8	85
+Os Hassums		8	5
+Os Herculóides		8	18
+Os Ho ho limpicos		8	24
+Os Homens que Venderam a Copa do Mundo		8	2
+Os Homens São de Marte... E é pra Lá que Eu Vou		8	13
+Os Horrores de Dolores Roach		8	8
+Os Imortais do Brasil		8	8
+Os Inocentes		8	8
+Os Invenciveis CarrosMonstros		8	26
+Os Irregulares de Baker Street		8	8
+Os Jetsons		8	75
+Os Jovens Titas		8	65
+Os Jovens Titãs em Ação		8	279
+Os Lobos da Ilha de Vancouver		8	3
+Os Lucros do Amor		8	12
+Os Mais Procurados do Mundo		8	5
+Os Mãos de Vaca		8	6
+Os Mares da Arabia		8	5
+Os Medicos da Face		8	8
+Os Mestres da Fritura		8	8
+Os Mistérios da Civilizacao Maia		8	4
+Os Mistérios de Frajola e Piu-Piu		9	55
+Os Mistérios de Rock Island		9	10
+Os Misteriosos Raptos em Iowa		9	3
+Os Mutantes Caminhos do Coracao		9	243
+Os Normais		9	71
+Os Novos Filmes do Scooby-Doo		9	24
+Os Originais		9	92
+Os Osbournes Investigacao Paranormal		9	28
+Os Outros		9	36
+Os Pacientes do Dr. García		9	10
+Os Padrinhos Mágicos		9	185
+Os Padrinhos Mágicos Mais Mágicos Que Nunca		9	12
+Os Padrinhos Magicos Um Novo Desejo		9	10
+Os Parcas A Serie		9	10
+Os Parques Nacionais Mais Fascinantes do Mundo		9	10
+Os Passaros Feridos		9	4
+Os Pecados de Kujo		9	10
+Os Pequenos Johnstons		9	104
+Os Pilares da Terra		9	4
+Os Pinguins de Madagascar		9	77
+Os Pioneiros		9	8
+Os Piores Ex		9	8
+Os Quatro da Candelaria		9	4
+Os Quebradores da Banca		9	6
+Os Queridinhos de Byron Bay		9	8
+Os Refens do Professor Hiiragi (2019) [L]		9	10
+Os Reis da Selva		9	5
+Os Reis da Sucata		9	50
+Os Reis de Tupelo Crime e Conspiracao nos Estados Unidos		9	3
+Os Reis do Arpao		9	9
+Os Reis do Esgoto		9	6
+Os Ricos Também Choram		9	60
+Os Ricos Também Choram [MEX]		9	60
+Os Roni		9	60
+Os Runarounds Musica e Sonhos		9	8
+Os Segredos Da Biblia		9	6
+Os Segredos das Piramides		9	12
+Os Segredos de Anna		9	12
+Os Segredos de Manscheid		9	24
+Os Segredos de Tutancamon		9	3
+Os Segredos do Everest		9	2
+Os Segredos do Zoológico		9	6
+Os Sem Nome		9	6
+Os Sete Monstrinhos		9	42
+Os Sete Relogios de Agatha Christie		9	3
+Os Simpsons		9	802
+Os Smurfs		9	104
+Os Suburbanos		9	130
+Os Supercaes e Seus Extraordinarios Trabalhos		9	5
+Os SUPERtontos		9	8
+Os Sustos Ocultos de Frankelda		9	5
+Os Testamentos Das Filhas de Gilead		9	10
+Os Thundermans		9	101
+Os Thundermans Disfarcados		9	26
+Os Top Dez dos Anos 80		9	6
+Os Trapalhoes		9	203
+Os Últimos Dias de Ptolemy Grey		9	6
+Os Ursinhos Gummi		9	65
+Os Vingadores A Serie		9	13
+Os Westies Donos do Oeste		9	8
+Os Winchesters		9	13
+OSHI NO KO		9	24
+Ossan’s Love		9	1
+Ossans Love [L]		9	7
+Ossans Love In the Sky [L]		9	8
+Ossans Love Returns [L]		9	9
+Oswaldo		9	52
+Ou Tudo ou Nada de Novo		9	8
+Ouça me - Duy Beni [L]		9	20
+Our Dating Sim [L]		9	8
+Our Kind of People		9	12
+Our Last Crusade or the Rise of a New World		9	24
+Our Movie [L]		9	12
+Our Skyy [L]		9	5
+Our Skyy 2 [L]		9	16
+Ourika Cidade em Chamas		9	7
+Ouro e Sangue		9	24
+Ousama Ranking		9	27
+Ousama Ranking Yuuki no Takarabako		9	10
+OUT THERE Crimes of the Paranormal		9	8
+Outcast		10	20
+Outer Banks		10	50
+Outlander		10	101
+Outlander Blood of My Blood		10	10
+Outra Chance - Gelsin Hayat Bildiği Gibi [L]		10	41
+Outra Vida		10	10
+Outro Amor - Bambaşka Biri [L]		10	16
+Over There		10	13
+Overlord		10	52
+Óvnis Investigação Secreta		10	14
+Oxen		10	6
+Oxygen The Series [L]		10	13
+Oz		10	56
+Ozark		10	44
