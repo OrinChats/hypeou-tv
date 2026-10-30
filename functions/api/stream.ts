@@ -1,5 +1,5 @@
 /**
- * Endpoint central de streaming para filmes e séries do Saimo TV.
+ * Endpoint central de streaming para filmes e séries do Hypeou TV.
  *
  * Resolve o stream sob demanda nos provedores (FenixFlix / Magnetflix)
  * e redireciona (HTTP 302) para a URL direta do vídeo com token fresco.

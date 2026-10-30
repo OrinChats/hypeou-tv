@@ -1,6 +1,6 @@
 // Passa o saimo.js das TVs para ES5 (Chromium 38+: webOS 3, Tizen 2.4/3, TVs de 2016-2019).
 // O build do Vite sai em Chrome 68; TV mais fraca/antiga nem conseguia ler o arquivo e ficava
-// para sempre em "Abrindo o Saimo TV…". Confere no fim que o resultado é ES5 puro.
+// para sempre em "Abrindo o Hypeou TV…". Confere no fim que o resultado é ES5 puro.
 import { transformAsync } from '@babel/core';
 import { parse } from 'acorn';
 import { readFileSync, writeFileSync } from 'node:fs';

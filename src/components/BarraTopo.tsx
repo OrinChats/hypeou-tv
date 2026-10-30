@@ -6,9 +6,11 @@
  *
  * Vinte cliques no ícone abrem o PIN do modo adulto, como no site de sempre.
  */
-import { memo, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAdultMode } from '../contexts/adultoContexto';
+import { useDpad } from '../contexts/dpadContexto';
+import { EVENTO_ABRIR_MENU } from '../navegacao/dom';
 import { assinar, atual as atualRadio, parar as pararRadio } from '../services/radioPlayer';
 import './AppHeader.css';
 import './BarraTopo.css';
@@ -75,6 +77,13 @@ export const BarraTopo = memo(function BarraTopo({ visible: visibleProp, autoHid
   // O nav bar só auto-esconde quando um player estiver sendo usado (/tv ou autoHide=true).
   // Fora isso (catálogos, início, busca, eventos, favoritos, rádios, etc.), ele fica fixo e visível na tela.
   const deveAutoEsconder = autoHide ?? pathname.startsWith('/tv');
+
+  // Na TV a barra é um menu lateral recolhido: só abre com a seta para a esquerda
+  // (na borda da tela) e recolhe ao escolher uma seção, ao mover o foco para o
+  // conteúdo (seta direita) ou no Voltar.
+  const { isEnabled: modoTv, setFocus, focusFirst, registerBackHandler } = useDpad();
+  const [menuAberto, setMenuAberto] = useState(false);
+  const focoAnteriorRef = useRef<HTMLElement | null>(null);
 
   const [mouseNoTopo, setMouseNoTopo] = useState(() => !deveAutoEsconder);
   // Controle remoto (TV): sem mouse para chegar ao topo, a barra aparece quando o foco entra nela.
@@ -143,7 +152,55 @@ export const BarraTopo = memo(function BarraTopo({ visible: visibleProp, autoHid
     }
   }, [pathname, deveAutoEsconder]);
 
-  const isVisivel = visibleProp === false ? false : (deveAutoEsconder ? (pedePin || mouseNoTopo || focoDentro) : true);
+  const isVisivel = visibleProp === false
+    ? false
+    : modoTv
+      ? (pedePin || menuAberto)
+      : (deveAutoEsconder ? (pedePin || mouseNoTopo || focoDentro) : true);
+
+  /** Recolhe o menu; `devolverFoco` leva o foco de volta ao conteúdo. */
+  const recolherMenu = useCallback((devolverFoco: boolean) => {
+    setMenuAberto(false);
+    if (!devolverFoco) return;
+    const antes = focoAnteriorRef.current;
+    window.requestAnimationFrame(() => {
+      if (antes && antes.isConnected && !antes.closest('.barra-topo') && antes.getClientRects().length) setFocus(antes);
+      else focusFirst();
+    });
+  }, [setFocus, focusFirst]);
+
+  // Seta para a esquerda na borda da tela: abre o menu e põe o foco na seção atual.
+  useEffect(() => {
+    if (!modoTv) return;
+    const abrir = () => {
+      const foco = document.activeElement as HTMLElement | null;
+      if (foco?.closest('.barra-topo')) return; // já está nele
+      focoAnteriorRef.current = foco && foco !== document.body ? foco : null;
+      setMenuAberto(true);
+      const alvo = trilho.current?.querySelector<HTMLElement>('[data-ativa="1"]')
+        ?? trilho.current?.querySelector<HTMLElement>('button');
+      if (alvo) setFocus(alvo, false);
+    };
+    window.addEventListener(EVENTO_ABRIR_MENU, abrir);
+    return () => window.removeEventListener(EVENTO_ABRIR_MENU, abrir);
+  }, [modoTv, setFocus]);
+
+  // Trocou de tela: o menu recolhe e o foco vai para o conteúdo da tela nova.
+  useEffect(() => {
+    if (!modoTv) return;
+    setMenuAberto(false);
+    const ids = [60, 250, 600].map((ms) => window.setTimeout(() => {
+      if (document.activeElement?.closest('.barra-topo') || document.activeElement === document.body) focusFirst();
+    }, ms));
+    return () => ids.forEach((id) => window.clearTimeout(id));
+  }, [pathname, modoTv, focusFirst]);
+
+  // Voltar com o menu aberto só recolhe o menu (registrado só enquanto aberto,
+  // para valer antes do Voltar da tela).
+  useEffect(() => {
+    if (!modoTv || !menuAberto) return;
+    return registerBackHandler(() => { recolherMenu(true); return true; });
+  }, [modoTv, menuAberto, registerBackHandler, recolherMenu]);
 
   useEffect(() => {
     if (!isVisivel) {
@@ -193,7 +250,13 @@ export const BarraTopo = memo(function BarraTopo({ visible: visibleProp, autoHid
       <header
         className={`barra-topo ${!isVisivel ? 'oculta' : ''}`}
         onFocus={() => setFocoDentro(true)}
-        onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocoDentro(false); }}
+        onBlur={(e) => {
+          if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
+          setFocoDentro(false);
+          // TV: o foco saiu do menu (seta direita, clique) -> recolhe. Sem relatedTarget
+          // (janela perdeu o foco) não mexe.
+          if (modoTv && e.relatedTarget) setMenuAberto(false);
+        }}
         role="banner"
         onMouseEnter={() => {
           hoverRef.current = true;
@@ -204,6 +267,7 @@ export const BarraTopo = memo(function BarraTopo({ visible: visibleProp, autoHid
           setMouseNoTopo(true);
         }}
         onMouseLeave={() => {
+          if (modoTv) { window.setTimeout(() => setMenuAberto(false), 300); return; }
           hoverRef.current = false;
           if (timerRef.current) clearTimeout(timerRef.current);
           timerRef.current = setTimeout(() => {
@@ -237,6 +301,10 @@ export const BarraTopo = memo(function BarraTopo({ visible: visibleProp, autoHid
               onClick={(e) => {
                 navigate(a.rota);
                 (e.currentTarget as HTMLElement)?.blur();
+                if (modoTv) {
+                  setMenuAberto(false);
+                  window.setTimeout(() => focusFirst(), 80); // mesma tela: o foco também sai do menu
+                }
               }}
               title={`${a.rotulo} (Alt+${i + 1})`}
             >
@@ -255,6 +323,7 @@ export const BarraTopo = memo(function BarraTopo({ visible: visibleProp, autoHid
                 onClick={(e) => {
                   (e.currentTarget as HTMLElement)?.blur();
                   navigate('/radios');
+                  if (modoTv) setMenuAberto(false);
                 }}
               >
                 <span className="equalizador"><i /><i /><i /></span>
@@ -268,6 +337,7 @@ export const BarraTopo = memo(function BarraTopo({ visible: visibleProp, autoHid
             onClick={(e) => {
               (e.currentTarget as HTMLElement)?.blur();
               navigate('/ajustes');
+              if (modoTv) setMenuAberto(false);
             }}
             title="Ajustes (Alt+8)"
             aria-label="Ajustes"
@@ -280,6 +350,18 @@ export const BarraTopo = memo(function BarraTopo({ visible: visibleProp, autoHid
           <time className="barra-relogio">{hora}</time>
         </div>
       </header>
+
+      {modoTv && !isVisivel && (
+        <div
+          className="barra-topo-dica"
+          aria-hidden="true"
+          data-dpad-ignorar="true"
+          onMouseEnter={() => {
+            focoAnteriorRef.current = null;
+            setMenuAberto(true);
+          }}
+        />
+      )}
 
       {pedePin && (
         <div className="pin-modal-backdrop" onClick={() => setPedePin(false)} data-dpad-camada="pin">

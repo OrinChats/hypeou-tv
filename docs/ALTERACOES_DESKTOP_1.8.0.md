@@ -1,4 +1,4 @@
-# SaimoTV Desktop 1.8.0
+# HypeouTV Desktop 1.8.0
 
 ## Séries e episódios
 
@@ -32,7 +32,7 @@
 
 - Catálogo, ficha e player receberam hierarquia visual mais limpa, navegação
   inspirada em aplicativos modernos de streaming e maior destaque do conteúdo
-  atual, mantendo a identidade do SaimoTV.
+  atual, mantendo a identidade do HypeouTV.
 - O cabeçalho global duplicado foi removido da reprodução VOD; o player usa sua
   própria barra superior e ocupa toda a janela.
 
@@ -40,4 +40,4 @@
 
 O workflow `.github/workflows/windows-desktop.yml` gera MSI e NSIS em
 `Actions > Build Windows Desktop > Run workflow` e publica os dois instaladores
-como artifact `SaimoTV-Windows-1.8.0`.
+como artifact `HypeouTV-Windows-1.8.0`.

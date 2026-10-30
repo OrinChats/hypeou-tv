@@ -3,7 +3,7 @@
 # Publica o site no Cloudflare Pages sem passar pelo GitHub (upload direto).
 #
 # ATENÇÃO: o site de verdade (saimo-tv.pages.dev) é um projeto ligado ao Git e publica sozinho
-# a cada push na `main` de SaimoTV/Saimo-Site. Este script publica os endereços antigos
+# a cada push na `main` de HypeouTV/Saimo-Site. Este script publica os endereços antigos
 # (saimo-tv2 e saimo-tv-f2w), que ficam na mesma conta (Saimo.tv.gs): continuam servindo
 # /api/* para apps velhos, e a página leva o usuário ao saimo-tv.pages.dev com os dados.
 #
@@ -17,7 +17,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 export CLOUDFLARE_ACCOUNT_ID="${CLOUDFLARE_ACCOUNT_ID:-e074091e48d179d86d956620fc8fa5f6}"
-export XDG_CONFIG_HOME="${SAIMO_CF_CONFIG:-$HOME/Library/Application Support/SaimoTV/wrangler-novo}"
+export XDG_CONFIG_HOME="${SAIMO_CF_CONFIG:-$HOME/Library/Application Support/HypeouTV/wrangler-novo}"
 PROJETOS="${SAIMO_PROJETO_SITE:-saimo-tv saimo-tv2 saimo-tv-f2w}"
 
 achar_wrangler() {

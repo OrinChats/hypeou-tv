@@ -271,7 +271,7 @@ export function HomeSelector({ onSelect }: HomeSelectorProps) {
 
 ```
 ┌─────────────────────────────────────────────┐
-│                 SaimoTV                      │
+│                 HypeouTV                      │
 │           Entretenimento sem limites        │
 ├─────────────────────────────────────────────┤
 │          O que você quer assistir?          │

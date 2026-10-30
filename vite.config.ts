@@ -73,7 +73,7 @@ const configTv = defineConfig({
     target: 'chrome68',
     cssTarget: 'chrome61',
     minify: 'oxc',
-    lib: { entry: 'src/entrada-tv.ts', name: 'SaimoTV', formats: ['iife'], fileName: () => 'saimo.js', cssFileName: 'saimo' },
+    lib: { entry: 'src/entrada-tv.ts', name: 'HypeouTV', formats: ['iife'], fileName: () => 'saimo.js', cssFileName: 'saimo' },
     chunkSizeWarningLimit: 4000,
     copyPublicDir: false,
   },

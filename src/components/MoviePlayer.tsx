@@ -166,6 +166,10 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
   
   const controlsTimeoutRef = useRef<number | null>(null);
   const ignorarFocoPalcoRef = useRef(false);
+  /** Esta fonte já começou a tocar: um 'Carregando' depois de um seek não é falha da fonte. */
+  const jaTocouRef = useRef(false);
+  /** Instante do último "Pular abertura": segura OK repetido pela tecla apertada. */
+  const pulouEmRef = useRef(0);
 
   // Formatar tempo (segundos -> HH:MM:SS ou MM:SS)
   const formatTime = useCallback((seconds: number): string => {
@@ -241,6 +245,9 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
     if (resolvendo || !isLoading || fontes.length <= 1) return;
 
     const timeout = setTimeout(() => {
+      // Já tocou: o 'Carregando' veio de um seek (pular abertura, avançar). Trocar
+      // de fonte aqui recarregava o vídeo e bagunçava som e foco.
+      if (jaTocouRef.current) return;
       console.log('Video demorou 8s para carregar, tentando próxima fonte automaticamente...');
       setFonteIdx((prev) => (prev + 1) % fontes.length);
     }, 8000);
@@ -258,6 +265,7 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
     if (resolvendo || !movie || !videoRef.current || !urlAtiva) return;
 
     const geracao = ++loadGenerationRef.current;
+    jaTocouRef.current = false;
     const atual = () => loadGenerationRef.current === geracao;
     const video = videoRef.current;
     const abortador = new AbortController();
@@ -353,8 +361,12 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
     const reproduzir = () => {
       if (!atual()) return;
       audioInteligenteService.conectar(video);
-      video.play().catch(() => {
+      video.play().catch((erro: unknown) => {
         if (!atual()) return;
+        // AbortError = o play foi interrompido por um seek/carga nova: não é bloqueio
+        // de autoplay e NÃO pode silenciar o vídeo (era isso que deixava o som mudo
+        // depois de "Pular abertura").
+        if ((erro as { name?: string })?.name !== 'NotAllowedError') return;
         video.muted = true;
         setIsMuted(true);
         video.play().catch(() => { /* interação manual continua disponível */ });
@@ -477,6 +489,7 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
 
     const handleWaiting = () => seguro(() => setIsLoading(true));
     const handlePlaying = () => seguro(() => {
+      jaTocouRef.current = true;
       if (!abertura.avisado) {
         abertura.avisado = true;
         telemetria.tocou('vod', abertura.titulo, abertura.url, 1, performance.now() - abertura.desde);
@@ -986,6 +999,7 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
         case ' ':
           // Comportamento padrão de player de TV: OK reproduz/pausa.
           consumir();
+          if (evento.repeat || Date.now() - pulouEmRef.current < 700) break;
           togglePlay();
           resetarControles();
           break;
@@ -1100,9 +1114,23 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
   const skipIntro = useCallback(() => {
     const video = videoRef.current;
     if (!video || !trechoAtual) return;
+    if (Date.now() - pulouEmRef.current < 600) return; // OK segurado: um pulo só
+    pulouEmRef.current = Date.now();
+    // O botão some logo após o pulo. Se ele estiver com o foco, o foco cairia no
+    // <body> e o handler de teclas do player (que trata body como "palco") passaria a
+    // reagir a OK/setas, alternando play/pausa e seek. O foco vai para o palco antes.
+    const palco = containerRef.current?.querySelector<HTMLElement>('[data-dpad-palco]');
+    if (palco) {
+      ignorarFocoPalcoRef.current = true;
+      setFocus(palco, false);
+      window.setTimeout(() => { ignorarFocoPalcoRef.current = false; }, 0);
+    }
     posicionar(video, Math.min(video.duration, trechoAtual.fim ?? video.duration));
     setTrechoPulado(trechoAtual);
-  }, [trechoAtual]);
+    // Garante o som: nada do que aconteceu antes pode deixar o vídeo mudo por engano.
+    if (!isMuted && video.muted) video.muted = false;
+    video.play().catch(() => { /* o play já está em curso ou precisa de interação */ });
+  }, [trechoAtual, setFocus, isMuted]);
 
   useMediaSession({
     titulo: movie?.name,

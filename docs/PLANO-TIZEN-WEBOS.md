@@ -1,4 +1,4 @@
-# Saimo TV para Samsung (Tizen) e LG (webOS) — plano
+# Hypeou TV para Samsung (Tizen) e LG (webOS) — plano
 
 Escrito em 19/10/2026. **Status (19/10/2026): as fases 1, 2 e 5 estão feitas; a fase 3 foi feita
 sem o AVPlay; a fase 0 (prova nas TVs reais) e a fase 4 (desempenho) dependem de uma TV de
@@ -7,7 +7,7 @@ verdade e ainda não foram executadas.** O que existe hoje está em "Estado atua
 ## 1. Decisão principal: reaproveitar o site, não escrever app novo
 
 Samsung (Tizen) e LG (webOS) rodam **apps web** (HTML + JS num Chromium da própria TV).
-O site (`Saimo-TV`, React + Vite) já tem quase tudo o que um app de TV precisa:
+O site (`Hypeou-TV`, React + Vite) já tem quase tudo o que um app de TV precisa:
 
 | Já existe no site | Onde |
 |---|---|
@@ -61,7 +61,7 @@ As versões de Chromium acima são aproximadas e precisam ser confirmadas na Fas
 
 ## 4. O que muda no código
 
-Tudo no repositório `Saimo-TV`, num build separado (`bun run build:tv`), sem afetar o site.
+Tudo no repositório `Hypeou-TV`, num build separado (`bun run build:tv`), sem afetar o site.
 
 ### 4.1 Estrutura nova
 ```
@@ -83,7 +83,7 @@ src/services/players/        adaptador de player (§4.3)
   para números 0–9 (o código 1010 do parental precisa delas), Play/Pausa, CH+/CH−,
   cores, Info. Mapear **Voltar**: `10009` (Samsung) e `461` (LG) para a ação `back` que o
   `DpadContext` já entende. CH+/CH− trocam de canal no player ao vivo.
-- **Sair**: voltar na tela inicial pergunta "Sair do Saimo TV?" e chama
+- **Sair**: voltar na tela inicial pergunta "Sair do Hypeou TV?" e chama
   `tizen.application.getCurrentApplication().exit()` / `window.close()` no webOS.
 - **Tela**: viewport fixo 1920×1080 (`<meta name="viewport" content="width=1920">`), modo
   TV forçado (sem hover, foco grande, sem layout de celular).
@@ -118,7 +118,7 @@ src/services/players/        adaptador de player (§4.3)
 ## 5. Atualização
 - **Código do app**: pelo manifesto no Pages, toda vez que o site é publicado (`publicar_site.sh`
   passa a publicar também `dist-tv/` em `/tv/`).
-- **Casca**: o `release.sh` ganha `SaimoTV-Samsung.wgt` e `SaimoTV-LG.ipk` no release, e o
+- **Casca**: o `release.sh` ganha `HypeouTV-Samsung.wgt` e `HypeouTV-LG.ipk` no release, e o
   `versao.json` ganha `arquivos.tizen` e `arquivos.webos`. Links curtos novos no site:
   `/samsung` e `/lg`.
 
@@ -215,7 +215,7 @@ empacotado puro (atualização reinstalando) naquela marca.
 - **Instalador automático** (botão no app do Mac/Windows) e a **loja oficial**.
 
 ### Como testar na TV
-1. `./scripts/montar_tv.sh` gera `build/tv/SaimoTV-Samsung.wgt` e `build/tv/SaimoTV-LG.ipk`.
+1. `./scripts/montar_tv.sh` gera `build/tv/HypeouTV-Samsung.wgt` e `build/tv/HypeouTV-LG.ipk`.
 2. Samsung: assinar e instalar (passos na página `/app`, aba Samsung). LG: `ares-install`.
 3. Abrir um canal https, um canal http e um filme. Se algo não tocar, ver no console da TV
    (`tizen` Web Inspector / `ares-inspect`) qual tentativa falhou.

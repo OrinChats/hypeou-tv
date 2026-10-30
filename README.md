@@ -1,7 +1,7 @@
 # Hypeou TV — Web
 
 <p align="center">
-  Hypeou TV: <a href="https://github.com/SaimoTV/SaimoTV-Android">TV Box</a> · <a href="https://github.com/SaimoTV/Saimo-Cell-V2">Celular</a> · <a href="https://github.com/SaimoTV/SaimoWin">Windows</a> · <a href="https://github.com/SaimoTV/HypeouPlayer">Mac</a> · <a href="https://github.com/SaimoTV/SaimoCatalogos">Catálogo</a> · <b>Site</b> · <a href="https://github.com/SaimoTV/saimo-downloads">Downloads</a>
+  Hypeou TV: <a href="https://github.com/HypeouTV/HypeouTV-Android">TV Box</a> · <a href="https://github.com/HypeouTV/Saimo-Cell-V2">Celular</a> · <a href="https://github.com/HypeouTV/SaimoWin">Windows</a> · <a href="https://github.com/HypeouTV/HypeouPlayer">Mac</a> · <a href="https://github.com/HypeouTV/SaimoCatalogos">Catálogo</a> · <b>Site</b> · <a href="https://github.com/HypeouTV/saimo-downloads">Downloads</a>
 </p>
 
 Canais ao vivo, guia de programação, filmes e séries direto no navegador:
@@ -14,7 +14,7 @@ O catálogo de canais é lido na raiz do Worker `hypeou-canais.orinchats.workers
 Os endereços são fixos (`src/services/listas.ts`). Em Ajustes > Listas o usuário só pode
 importar um arquivo para substituir cada lista, ou removê-lo; cada lista é independente. Os links de download e os
 atalhos `/tvbox`, `/celular`, `/mac`, `/windows`, `/samsung` e `/lg` saem dos anexos da última
-release de [`SaimoTV/saimo-downloads`](https://github.com/SaimoTV/saimo-downloads/releases/latest),
+release de [`HypeouTV/saimo-downloads`](https://github.com/HypeouTV/saimo-downloads/releases/latest),
 lidos na hora; o [`versao.json`](https://canais-saimo.pages.dev/versao.json) só informa a versão.
 
 ---
@@ -102,5 +102,5 @@ O código da web é empacotado para Smart TVs através do script:
 ./scripts/montar_tv.sh
 ```
 
-Gera `build/tv/SaimoTV-Samsung.wgt` e `build/tv/SaimoTV-LG.ipk`.
+Gera `build/tv/HypeouTV-Samsung.wgt` e `build/tv/HypeouTV-LG.ipk`.
 O pacote contém o carregador leve (`tv/comum/carregador.js`) que busca a versão atualizada do site ao abrir.

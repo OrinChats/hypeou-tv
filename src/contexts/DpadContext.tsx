@@ -4,7 +4,7 @@ import { DpadContext, type Direction, type DpadContextValue } from './dpadContex
 import { emModoTv, EVENTO_MODO, plataformaNativa } from '../plataforma/modo';
 import { sairDoApp } from '../plataforma/tv';
 import { caixaDe, escolherNaDirecao, type Candidato } from '../navegacao/nucleo';
-import { camadaAtiva, focaveis, rolarAteVer, SELETOR_FOCAVEL, visivel } from '../navegacao/dom';
+import { camadaAtiva, EVENTO_ABRIR_MENU, focaveis, rolarAteVer, SELETOR_FOCAVEL, visivel } from '../navegacao/dom';
 import { planejarVoltar } from '../navegacao/voltar';
 
 /**
@@ -355,6 +355,12 @@ export function DpadNavigationProvider({ children }: { children: React.ReactNode
       // Setas dentro de um campo de texto: cima/baixo saem do campo, lados são do texto.
       if (digitando && (tecla.direcao === 'left' || tecla.direcao === 'right')) return;
       if (acoesRef.current.moveFocus(tecla.direcao)) {
+        evento.preventDefault();
+        evento.stopPropagation();
+      } else if (tecla.direcao === 'left' && !camadaAtiva()) {
+        // Borda esquerda da tela: a seta para a esquerda chama o menu lateral
+        // (que fica recolhido). Dentro de modal/player não se aplica.
+        window.dispatchEvent(new CustomEvent(EVENTO_ABRIR_MENU));
         evento.preventDefault();
         evento.stopPropagation();
       }

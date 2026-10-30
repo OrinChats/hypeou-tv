@@ -104,7 +104,35 @@ button { -webkit-tap-highlight-color: transparent; }
   justify-content: flex-start;
   gap: 30px;
 }
-.modo-tv .barra-topo.oculta { transform: translateX(-105%); }
+/* Menu lateral recolhido: fora da tela, sem sombra vazando e fora do alcance do
+   controle (pointer-events none => o D-pad não o enxerga). Abre sobre o conteúdo. */
+.modo-tv .barra-topo { z-index: 1200; transition: transform .22s cubic-bezier(.2,.8,.2,1); }
+.modo-tv .barra-topo.oculta {
+  transform: translateX(-110%);
+  opacity: 1;
+  box-shadow: none;
+  pointer-events: none;
+}
+/* Fio de luz na borda esquerda: avisa que o menu existe (seta ← abre). */
+.barra-topo-dica { display: none; }
+.modo-tv .barra-topo-dica {
+  display: block;
+  position: fixed;
+  left: 0; top: 50%;
+  width: 14px; height: 120px;
+  margin-top: -60px;
+  z-index: 1100;
+}
+.modo-tv .barra-topo-dica::after {
+  content: '';
+  position: absolute; left: 0; top: 30px;
+  width: 4px; height: 60px;
+  border-radius: 0 4px 4px 0;
+  background: var(--hype-accent);
+  opacity: .55;
+}
+body:has(.movie-player-overlay) .barra-topo-dica,
+body:has(.video-player-container) .barra-topo-dica { display: none !important; }
 .modo-tv .barra-logo { justify-content: flex-start; width: 100%; padding: 8px 10px; font-size: 1.12rem; }
 .modo-tv .barra-logo svg { width: 30px; height: 30px; flex: 0 0 30px; }
 .modo-tv .barra-abas {
@@ -156,7 +184,7 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .modo-tv .barra-relogio { font-size: 13px; color: var(--hype-muted); }
 .modo-tv .barra-engrenagem { color: #aab3bc; }
-.modo-tv .tela-com-barra { padding: 0 0 3rem 218px; }
+.modo-tv .tela-com-barra { padding: 0 0 3rem 0; }
 .modo-tv .heroi { margin-top: 0; height: clamp(420px, 66vh, 720px); }
 .modo-tv .heroi-texto { padding-left: clamp(34px, 4vw, 68px); }
 .modo-tv .fileira > header { padding-left: clamp(34px, 4vw, 68px); padding-right: 38px; }

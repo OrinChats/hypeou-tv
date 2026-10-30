@@ -136,7 +136,7 @@ Exemplos:
 
 ### Modo Adulto (Secreto)
 
-Para desbloquear canais adultos, o usuário deve clicar **15 vezes** no logo "Saimo TV":
+Para desbloquear canais adultos, o usuário deve clicar **15 vezes** no logo "Hypeou TV":
 
 ```typescript
 const SECRET_CLICK_COUNT = 15;

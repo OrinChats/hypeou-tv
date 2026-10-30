@@ -1,6 +1,6 @@
 > **Atualização (19/10/2026):** o endereço do site é `saimo-tv.pages.dev`, o projeto antigo da
 > Cloudflare (conta antiga), ligado ao GitHub antigo: publicar é dar push na `main` de
-> `gabrielsaimo/Saimo-TV`. O `saimo-tv2` foi abandonado; o texto abaixo é histórico.
+> `gabrielsaimo/Hypeou-TV`. O `saimo-tv2` foi abandonado; o texto abaixo é histórico.
 
 # Trocar o site de GitHub (ou largar o GitHub)
 
@@ -9,11 +9,11 @@ O site não embute lista nenhuma. Os endereços de canais
 (`https://filmes-saimo.pages.dev/`) são as constantes `PADRAO` de
 `src/services/listas.ts`; em Ajustes > Listas a pessoa troca, desliga (campo vazio)
 ou restaura o padrão, e isso fica no `localStorage`. Fora isso, o único nome fixo é o do
-repositório de downloads, `SaimoTV/saimo-downloads` (`src/services/versao.ts` e
+repositório de downloads, `HypeouTV/saimo-downloads` (`src/services/versao.ts` e
 `functions/_lib/baixar.ts`): os botões e os atalhos `/tvbox`, `/celular`, `/mac`,
 `/windows`, `/samsung` e `/lg` leem os anexos da última release pela API do GitHub e
-casam pelo nome do arquivo (`SaimoTV.apk`, `SaimoCell.apk`, `SaimoTV.dmg`,
-`SaimoTV-Windows.zip`, `SaimoTV-Samsung.wgt`, `SaimoTV-LG.ipk`), então subir outra
+casam pelo nome do arquivo (`HypeouTV.apk`, `HypeouCell.apk`, `HypeouTV.dmg`,
+`HypeouTV-Windows.zip`, `HypeouTV-Samsung.wgt`, `HypeouTV-LG.ipk`), então subir outra
 versão ou trocar o repositório é só mudar a constante. O `versao.json` de
 `canais-saimo.pages.dev` continua sendo lido para a versão e como reserva, e só
 aceitam `https://github.com/<dono>/<repo>/releases/download/…`.

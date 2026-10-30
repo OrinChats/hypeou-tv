@@ -104,14 +104,8 @@ export function useControleTv(o: {
         }
       }
 
-      // Da barra do topo, a seta para baixo entra nos controles do player.
-      if (naBarra && e.key === 'ArrowDown') {
-        consumir();
-        mostrarControles();
-        const botao = primeiroControle();
-        if (botao) window.requestAnimationFrame(() => setFocus(botao));
-        return;
-      }
+      // Menu lateral aberto: as setas são dele (ele é vertical; descer não entra no player).
+      if (naBarra) return;
 
       if (s.controlesVisiveis) return; // aí o D-pad cuida de tudo
 

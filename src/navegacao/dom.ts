@@ -94,3 +94,6 @@ export function rolarAteVer(el: HTMLElement): void {
     el.scrollIntoView();
   }
 }
+
+/** Disparado quando a seta para a esquerda não tem mais para onde ir: abre o menu lateral (TV). */
+export const EVENTO_ABRIR_MENU = 'hypeou:abrir-menu';

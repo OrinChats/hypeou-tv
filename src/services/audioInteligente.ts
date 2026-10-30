@@ -85,7 +85,11 @@ class AudioInteligenteService {
           ctx.resume().catch(() => {});
         }
       };
+      // Depois de um seek (pular abertura) o contexto pode ficar suspenso e o vídeo
+      // toca sem som: retoma em qualquer retomada de reprodução.
       video.addEventListener('play', retomar, { passive: true });
+      video.addEventListener('playing', retomar, { passive: true });
+      video.addEventListener('seeked', retomar, { passive: true });
     } catch {
       // Ignora falhas em navegadores sem suporte ou restrições de mídia
     }
