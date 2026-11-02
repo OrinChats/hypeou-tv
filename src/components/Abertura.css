@@ -1,0 +1,43 @@
+/* Por cima de tudo enquanto a logo se monta; some em fade quando termina. */
+.abertura {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(60% 50% at 18% 30%, rgba(40, 110, 150, 0.35), transparent 70%),
+    radial-gradient(55% 45% at 85% 78%, rgba(120, 50, 150, 0.38), transparent 70%),
+    linear-gradient(160deg, #151a45, #0b0f2a 60%);
+  opacity: 1;
+  transition: opacity 300ms ease;
+  cursor: pointer;
+}
+
+.abertura.saindo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.abertura-luz {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.abertura-logo {
+  position: relative;
+  width: min(64vmin, 560px);
+  height: auto;
+  overflow: visible;
+}
+
+/* Nova identidade Hypeou TV */
+.hypeou-abertura { display:flex; align-items:center; justify-content:center; overflow:hidden; background:#071b40; }
+.hypeou-abertura .abertura-luz, .hypeou-abertura .abertura-logo { display:none; }
+.hypeou-abertura-halo { position:absolute; width:min(72vw, 520px); aspect-ratio:1; border-radius:32%; background:#13e9ef; filter:blur(70px); opacity:.25; animation:hypeou-halo 2s ease-in-out both; }
+.hypeou-abertura-logo { display:block !important; position:relative; width:min(68vw, 460px); height:auto; border-radius:24%; box-shadow:0 0 45px #12e6ed66; animation:hypeou-logo-in 1.2s cubic-bezier(.2,.8,.2,1) both; }
+.hypeou-abertura.saindo { opacity:0; transition:opacity .3s ease; }
+@keyframes hypeou-logo-in { 0% {opacity:0; transform:scale(.72) rotate(-5deg); filter:blur(12px);} 70% {opacity:1; transform:scale(1.04) rotate(1deg); filter:blur(0);} 100% {opacity:1; transform:scale(1) rotate(0);} }
+@keyframes hypeou-halo { 0% {transform:scale(.5);opacity:0;} 55% {transform:scale(1.1);opacity:.4;} 100% {transform:scale(1);opacity:.25;} }
