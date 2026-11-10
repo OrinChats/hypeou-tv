@@ -20,6 +20,7 @@ import type { Movie, SeriesEpisodeInfo } from './types/movie';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import './App.css';
 import './styles/owntv-inspired.css';
+import './styles/hypeou-refresh.css';
 import { IconeMaterial } from './components/IconeMaterial';
 
 /**

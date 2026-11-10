@@ -27,6 +27,11 @@ export function Heroi({ item, rodape }: { item: Destaque | null; rodape?: ReactN
       {imagem && <img key={imagem} className={`heroi-fundo ${item.fundo ? '' : 'borrado'}`} src={imagem} alt="" referrerPolicy="no-referrer" />}
       <div className="heroi-vinheta" />
       <div className="heroi-texto">
+        {item.selos && item.selos.length > 0 && (
+          <div className="heroi-selos" aria-label="Informações do título">
+            {item.selos.map((selo, indice) => <span key={`${selo}-${indice}`}>{selo}</span>)}
+          </div>
+        )}
         <h1>{item.titulo}</h1>
         {item.sinopse && <p>{item.sinopse}</p>}
         {item.acoes && <div className="heroi-acoes">{item.acoes}</div>}
