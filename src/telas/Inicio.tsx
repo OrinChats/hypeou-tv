@@ -122,10 +122,6 @@ export function Inicio() {
     ? [candidatosHeroi[indiceHeroi], candidatosHeroi[(indiceHeroi + 1) % candidatosHeroi.length]].filter(Boolean)
     : [];
 
-  const irParaFileira = (id: string) => {
-    document.getElementById(`prat-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   const abrirCanal = (c: Channel) => navigate(`/tv/${c.id}`);
 
   const abrirCatalogoDaFileira = (fila: Prateleira) => {
@@ -165,14 +161,6 @@ export function Inicio() {
         })}
         {destaquesTv.length === 0 && <div className="tv-destaque tv-destaque-vazio" />}
       </section>
-
-      {filas.length > 1 && (
-        <nav className="generos-atalhos" aria-label="Ir para um gênero">
-          {filas.map((f) => (
-            <button key={f.id} type="button" onClick={() => irParaFileira(f.id)}>{f.titulo}</button>
-          ))}
-        </nav>
-      )}
 
       {!links.canais && <SemLista tipo="canais" />}
       {!links.filmes && <SemLista tipo="filmes" />}
