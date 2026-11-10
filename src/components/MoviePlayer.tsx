@@ -1270,29 +1270,6 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
     }
   }, [movie, urlExterna]);
 
-  // Fontes HTTP não podem ser carregadas com segurança dentro do site HTTPS.
-  // Nesses casos, oferecemos a abertura direta em uma nova aba; no app nativo
-  // o player continua usando a reprodução interna.
-  const abrirEmAbaSeparada = () => {
-    if (!urlAtiva) return;
-    window.open(urlAtiva, '_blank', 'noopener,noreferrer');
-  };
-
-  const copiarEndereco = async () => {
-    try {
-      await navigator.clipboard.writeText(urlAtiva);
-    } catch {
-      const campo = document.createElement('textarea');
-      campo.value = urlAtiva;
-      campo.style.position = 'fixed';
-      campo.style.opacity = '0';
-      document.body.appendChild(campo);
-      campo.select();
-      document.execCommand('copy');
-      campo.remove();
-    }
-  };
-
   if (!movie) {
     return (
       <div className="movie-player empty">
@@ -1302,34 +1279,6 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
           </svg>
           <h3>Selecione um filme ou série</h3>
           <p>Escolha algo para assistir no catálogo</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (resolverNoSite && !resolvendo && urlAtiva.startsWith('http://')) {
-    return (
-      <div className="movie-player http-separate-screen">
-        <div className="http-separate-card">
-          <div className="http-separate-icon" aria-hidden="true">↗</div>
-          <h2>Este vídeo toca numa página separada</h2>
-          <p>O endereço dele é HTTP, e o navegador não deixa um vídeo assim tocar dentro de uma página segura. Fora daqui ele pode abrir normalmente.</p>
-          <button className="http-open-button" onClick={abrirEmAbaSeparada}>
-            Abrir numa página separada <span aria-hidden="true">↗</span>
-          </button>
-          <p className="http-app-note">No aplicativo, isso nem aparece.</p>
-          <button className="http-copy-button" onClick={() => void copiarEndereco()}>
-            <span aria-hidden="true">▢</span> Copiar endereço
-          </button>
-          <div className="http-external-players">
-            <span>Ou abrir em player externo:</span>
-            <div>
-              <button onClick={() => { window.location.href = `vlc://${urlAtiva}`; }}>VLC</button>
-              <button onClick={() => { window.location.href = `iina://open?url=${encodeURIComponent(urlAtiva)}`; }}>IINA</button>
-              <button onClick={() => { window.location.href = `potplayer://${urlAtiva}`; }}>PotPlayer</button>
-            </div>
-          </div>
-          <button className="http-back-button" onClick={onBack}>Voltar ao catálogo</button>
         </div>
       </div>
     );

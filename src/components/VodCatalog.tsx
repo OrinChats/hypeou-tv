@@ -554,7 +554,6 @@ export function VodCatalog({
       for (const g of nomes) {
         const doGenero = lista
           .filter((it) => it.generos.includes(g) && !!it.capa)
-          .slice(0, 25)
           .map((it) => ({
             tipo,
             titulo: it.titulo,
@@ -574,20 +573,17 @@ export function VodCatalog({
     const tipoLetra = ehSerie ? 's' : 'f';
     const prefixoTitulo = secao === null ? 'Filmes de ' : '';
 
-    // Otimização extrema para TV: UMA ÚNICA PASSADA com early break assim que preencher as cotas
+    // Uma passada pelo índice inteiro: cada fileira pode continuar carregando
+    // títulos até o fim, como os carrosséis de serviços de streaming.
     const generosValidos = generosAlvo.filter((g) => generos.todos.includes(g));
     const baldes: Record<string, ItemDestaque[]> = {};
     for (const g of generosValidos) baldes[g] = [];
-
-    const COTA = 25;
-    let pendentes = generosValidos.length;
 
     for (let i = 0; i < listaBase.length; i++) {
       const item = listaBase[i];
       let capaCache: string | null | undefined = undefined;
 
       for (const g of generosValidos) {
-        if (baldes[g].length >= COTA) continue;
         if (temGenero(generos, item.titulo, ehSerie, g)) {
           if (capaCache === undefined) {
             capaCache = capaDaFicha(generos, item.titulo, ehSerie) || '';
@@ -600,13 +596,9 @@ export function VodCatalog({
               ano: item.ano,
               capa: capaCache,
             });
-            if (baldes[g].length === COTA) {
-              pendentes--;
-            }
           }
         }
       }
-      if (pendentes <= 0) break;
     }
 
     for (const g of generosValidos) {
@@ -2033,14 +2025,20 @@ function CarrosselFileira({
 }: CarrosselFileiraProps) {
   const trilhoRef = useRef<HTMLDivElement | null>(null);
   const [borda, setBorda] = useState({ esq: false, dir: true });
+  const [limite, setLimite] = useState(32);
+
+  useEffect(() => setLimite(32), [titulo, itens]);
 
   const medir = useCallback(() => {
     const el = trilhoRef.current;
     if (!el) return;
+    if (limite < itens.length && el.scrollLeft + el.clientWidth >= el.scrollWidth - el.clientWidth * 1.5) {
+      setLimite((atual) => Math.min(itens.length, atual + 32));
+    }
     const esq = el.scrollLeft > 6;
-    const dir = el.scrollLeft + el.clientWidth < el.scrollWidth - 6;
+    const dir = limite < itens.length || el.scrollLeft + el.clientWidth < el.scrollWidth - 6;
     setBorda((prev) => (prev.esq !== esq || prev.dir !== dir ? { esq, dir } : prev));
-  }, []);
+  }, [itens.length, limite]);
 
   useEffect(() => {
     medir();
@@ -2049,6 +2047,7 @@ function CarrosselFileira({
   }, [medir, itens]);
 
   const rolar = (sentido: number) => {
+    if (sentido > 0 && limite < itens.length) setLimite((atual) => Math.min(itens.length, atual + 32));
     trilhoRef.current?.scrollBy({ left: sentido * 540, behavior: 'smooth' });
   };
 
@@ -2083,7 +2082,7 @@ function CarrosselFileira({
           onWheel={onWheel}
           onMouseLeave={() => aoPassar(null)}
         >
-          {itens.map((item) => {
+          {itens.slice(0, limite).map((item) => {
             const fav = ehFavorito(item);
             return (
               <button
@@ -2113,7 +2112,7 @@ function CarrosselFileira({
             );
           })}
 
-          {verTodos && (
+          {verTodos && limite >= itens.length && (
             <button className="vod-card-ver-todos" onClick={verTodos}>
               <div className="vod-card-ver-todos-thumb">
                 <span className="vod-card-ver-todos-icone">›</span>
