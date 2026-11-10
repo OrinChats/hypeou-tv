@@ -225,18 +225,13 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
   const abrirHttpDiretoNoApp = resolverNoSite
     && /HypeouTV\//i.test(window.navigator.userAgent)
     && urlAtiva.startsWith('http://');
-
-  // O WebView do aplicativo permite conteúdo HTTP. Nele, a antiga ação do
-  // botão azul acontece automaticamente: sai do site e abre o arquivo de vídeo
-  // diretamente. Voltar no controle retorna ao catálogo pelo histórico.
-  useEffect(() => {
-    if (!abrirHttpDiretoNoApp || resolvendo || !urlAtiva) return;
-    window.location.assign(urlAtiva);
-  }, [abrirHttpDiretoNoApp, resolvendo, urlAtiva]);
-
   // No navegador, tenta primeiro a URL HTTPS direta; se CORS/rede impedir,
   // tenta a mesma fonte pelo proxy da aplicação antes de trocar de servidor.
-  const urlDeReproducao = needsProxy(urlAtiva)
+  // No APK o WebView permite conteúdo misto: usa o HTTP direto dentro do nosso
+  // player, preservando progresso, título, temporada e episódio assistidos.
+  const urlDeReproducao = abrirHttpDiretoNoApp
+    ? urlAtiva
+    : needsProxy(urlAtiva)
     ? getProxiedUrl(urlAtiva)
     : forcarProxy ? proxyUrl({ url: urlAtiva }) : urlAtiva;
   useEffect(() => { setForcarProxy(false); }, [movie?.id, urlAtiva]);
