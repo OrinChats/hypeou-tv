@@ -944,16 +944,12 @@ export const VideoPlayer = memo(function VideoPlayer({
     if (isChannelsPanelOpen) return;
     controlsTimeoutRef.current = window.setTimeout(() => {
       if (isPlayingRef.current) {
-        // Na TV, se o foco estava num botão da barra, devolve o foco ao palco (o vídeo)
-        // para o destaque não ficar preso num elemento invisível.
+        // Na TV, mantenha a barra visível enquanto o foco está nos controles.
+        // Esconder e mover esse foco automaticamente causava piscadas e comandos
+        // repetidos em alguns controles de Android TV/Fire TV.
         const focado = document.activeElement as HTMLElement | null;
         if (emModoTv() && focado?.closest('.video-player-container') && !focado.matches('[data-dpad-palco]')) {
-          const palco = containerRef.current?.querySelector<HTMLElement>('[data-dpad-palco]');
-          if (palco) {
-            ignorarFocoPalcoRef.current = true;
-            palco.focus({ preventScroll: true });
-            window.setTimeout(() => { ignorarFocoPalcoRef.current = false; }, 0);
-          }
+          return;
         }
         setShowControls(false);
         onControlsVisibilityChange?.(false);

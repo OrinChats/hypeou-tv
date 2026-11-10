@@ -553,6 +553,7 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
     // O app pode ser fechado pela casca da TV sem desmontar a tela: guarda o
     // ponto também na pausa e quando a página some (troca de app, tela da TV).
     video.addEventListener('pause', salvarProgresso);
+    window.addEventListener('hypeou-app-pause', salvarProgresso);
     const aoEsconder = () => {
       if (document.visibilityState === 'hidden') salvarProgresso();
     };
@@ -579,6 +580,7 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
       video.removeEventListener('playing', handlePlaying);
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('pause', salvarProgresso);
+      window.removeEventListener('hypeou-app-pause', salvarProgresso);
       document.removeEventListener('visibilitychange', aoEsconder);
       window.removeEventListener('beforeunload', salvarProgresso);
     };
@@ -732,17 +734,12 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
     setShowControls(true);
     if (!isPlaying) return;
     controlsTimeoutRef.current = window.setTimeout(() => {
-      // Some sempre após 5 s, como em qualquer player. Na TV, se o foco estava num
-      // botão da barra, devolve o foco ao palco (o vídeo) para o destaque não ficar
-      // preso num elemento invisível.
+      // Na TV, a barra não pode desaparecer enquanto o usuário está operando um
+      // botão ou o volume com o controle remoto. Isso evitava foco saltando e a
+      // sensação de tela piscando/toques fantasmas.
       const focado = document.activeElement as HTMLElement | null;
       if (emModoTv() && focado?.closest('.movie-player') && !focado.matches('[data-dpad-palco]')) {
-        const palco = containerRef.current?.querySelector<HTMLElement>('[data-dpad-palco]');
-        if (palco) {
-          ignorarFocoPalcoRef.current = true;
-          palco.focus({ preventScroll: true });
-          window.setTimeout(() => { ignorarFocoPalcoRef.current = false; }, 0);
-        }
+        return;
       }
       setShowControls(false);
     }, 5000);

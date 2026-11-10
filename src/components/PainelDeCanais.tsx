@@ -134,7 +134,6 @@ export const PainelDeCanais = memo(function PainelDeCanais({
   hasSecondChannel = true,
 }: PainelDeCanaisProps) {
   const [busca, setBusca] = useState('');
-  const [categoriaAtiva, setCategoriaAtiva] = useState<string>('Todos');
   const [menuContexto, setMenuContexto] = useState<{ x: number; y: number; channel: Channel } | null>(null);
 
   const listaRef = useRef<HTMLDivElement>(null);
@@ -230,26 +229,9 @@ export const PainelDeCanais = memo(function PainelDeCanais({
     return () => aside.removeEventListener('dpad-opcoes', aoPedirOpcoes);
   }, [channels]);
 
-  // Categorias disponíveis
-  const categorias = useMemo(() => {
-    const set = new Set<string>();
-    channels.forEach((c) => {
-      if (c.category) set.add(c.category);
-    });
-    const ordenadas = categoryOrder.filter((cat) => set.has(cat));
-    const extras = [...set].filter((cat) => !categoryOrder.includes(cat)).sort((a, b) => a.localeCompare(b, 'pt-BR'));
-    return ['Todos', 'Favoritos', ...ordenadas, ...extras];
-  }, [channels]);
-
   // Canais filtrados e agrupados
   const canaisFiltrados = useMemo(() => {
     let result = channels;
-
-    if (categoriaAtiva === 'Favoritos') {
-      result = result.filter((ch) => favorites.includes(ch.id));
-    } else if (categoriaAtiva !== 'Todos') {
-      result = result.filter((ch) => ch.category === categoriaAtiva);
-    }
 
     if (busca.trim()) {
       const q = busca.toLowerCase();
@@ -259,7 +241,7 @@ export const PainelDeCanais = memo(function PainelDeCanais({
     }
 
     return result;
-  }, [channels, categoriaAtiva, busca, favorites]);
+  }, [channels, busca]);
 
   const indiceFiltrado = useMemo(() => {
     const mapa = new Map<string, number>();
@@ -278,9 +260,9 @@ export const PainelDeCanais = memo(function PainelDeCanais({
     return CHUNK_SIZE;
   });
 
-  // Reseta ou ajusta limite ao mudar categoria ou busca
+  // Reseta ou ajusta limite ao mudar a busca
   useEffect(() => {
-    if (activeChannelId && categoriaAtiva === 'Todos' && !busca.trim()) {
+    if (activeChannelId && !busca.trim()) {
       const idx = channels.findIndex((c) => c.id === activeChannelId);
       if (idx >= 0) {
         setRenderLimit(Math.min(channels.length, Math.max(CHUNK_SIZE, idx + 15)));
@@ -289,7 +271,7 @@ export const PainelDeCanais = memo(function PainelDeCanais({
     }
     setRenderLimit((atual) => Math.min(canaisFiltrados.length, Math.max(CHUNK_SIZE, atual)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoriaAtiva, busca, activeChannelId, channels]);
+  }, [busca, activeChannelId, channels]);
 
   const carregarMais = useCallback(() => {
     setRenderLimit((prev) => {
@@ -334,9 +316,6 @@ export const PainelDeCanais = memo(function PainelDeCanais({
   }, [canaisFiltrados, renderLimit]);
 
   const grupos = useMemo(() => {
-    if (categoriaAtiva !== 'Todos' && categoriaAtiva !== 'Favoritos') {
-      return [{ categoria: categoriaAtiva, canais: canaisVisiveis }];
-    }
     const mapa = new Map<string, Channel[]>();
     canaisVisiveis.forEach((c) => {
       const cat = c.category || 'Outros';
@@ -361,21 +340,7 @@ export const PainelDeCanais = memo(function PainelDeCanais({
     });
 
     return out;
-  }, [canaisVisiveis, categoriaAtiva]);
-
-  const handleCategoryClick = (cat: string) => {
-    setCategoriaAtiva(cat);
-    if (cat === 'Todos' || cat === 'Favoritos') {
-      listaRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      setTimeout(() => {
-        const header = listaRef.current?.querySelector(`[data-cat-header="${cat}"]`);
-        if (header) {
-          header.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 50);
-    }
-  };
+  }, [canaisVisiveis]);
 
   /** Perto do fim do que está desenhado, o próximo bloco de canais já entra. */
   const aoFocarCanal = useCallback((id: string) => {
@@ -399,7 +364,7 @@ export const PainelDeCanais = memo(function PainelDeCanais({
     const focoNaLista = !!atual?.classList.contains('painel-linha-canal') && atual.isConnected;
     // O foco da lista continua num canal que existe: nada a fazer.
     if (focoNaLista && idAtual && indiceFiltrado.has(idAtual)) return;
-    // O foco está num campo/pílula do painel (digitando a busca, trocando filtro):
+    // O foco está no campo de busca ou em outro controle do painel:
     // não roubar o foco de quem está usando.
     if (!focoNaLista && atual && asideRef.current?.contains(atual)) return;
 
@@ -414,7 +379,7 @@ export const PainelDeCanais = memo(function PainelDeCanais({
     const alvo = listaRef.current?.querySelector<HTMLElement>(`[data-channel-id="${ids[indice]}"]`);
     if (alvo) setFocus(alvo);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [aberto, categoriaAtiva, busca, canaisFiltrados, renderLimit, modoTv]);
+  }, [aberto, busca, canaisFiltrados, renderLimit, modoTv]);
 
   const fraseRodape = modoTv
     ? 'OK assiste · Menu/Info: fontes e favoritos · Voltar fecha a lista'
@@ -513,25 +478,6 @@ export const PainelDeCanais = memo(function PainelDeCanais({
             </svg>
           </button>
         )}
-      </div>
-
-      {/* Pílulas de Categoria horizontais */}
-      <div className="painel-pilulas-scroll">
-        {categorias.map((cat) => {
-          const ativa = categoriaAtiva === cat;
-          return (
-            <button
-              key={cat}
-              type="button"
-              className={`painel-pilula ${ativa ? 'ativa' : ''}`}
-              onClick={() => handleCategoryClick(cat)}
-              data-focusable="true"
-              aria-pressed={ativa}
-            >
-              {cat}
-            </button>
-          );
-        })}
       </div>
 
       {/* Lista de Canais com grupos */}

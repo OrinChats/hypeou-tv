@@ -6,6 +6,7 @@ import { iniciar as iniciarTelemetria } from './services/telemetria'
 import { migrarUmaVez } from './services/listas'
 import { sondarProxy } from './utils/streamUrl'
 import { vigiarExtensoes } from './plataforma/bloqueioExtensoes'
+import { DpadProvider } from './contexts/DpadProvider'
 
 // Antes de qualquer tela: esquece o que as versões anteriores guardaram de listas.
 migrarUmaVez()
@@ -22,7 +23,7 @@ const sondagem = Promise.race([sondarProxy(), new Promise<void>((ok) => window.s
 void sondagem.finally(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
-      <App />
+      <DpadProvider><App /></DpadProvider>
     </StrictMode>,
   )
 })
