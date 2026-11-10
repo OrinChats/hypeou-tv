@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Abertura } from '../components/Abertura';
 import { BarraTopo } from '../components/BarraTopo';
-import { CartaoCapa, CartaoLargo, Fileira, FileiraEsqueleto, Heroi, SemLista } from '../components/Telas';
+import { CartaoCapa, CartaoLargo, Fileira, FileiraEsqueleto, SemLista } from '../components/Telas';
 import { useCanais } from '../hooks/useCanais';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useListas } from '../services/listas';
@@ -16,11 +16,9 @@ import { lista as listaAndamento } from '../services/continuar';
 import { getCurrentProgram, onEPGUpdate } from '../services/epgService';
 import { filasDaInicio, nomeLimpo, pararDeOuvir, type Prateleira } from '../services/prateleiras';
 import type { ItemDestaque } from '../services/vodService';
-import { ROTULO_TIPO, useAbrirVod, useHeroiVod } from './compartilhado';
+import { ROTULO_TIPO, useAbrirVod } from './compartilhado';
 import { CHAVE_AO_INICIAR } from './Ajustes';
-import {
-  alternar as alternarVodFav, aoMudar as aoMudarVodFav, contem as ehVodFav, lista as vodFavoritos,
-} from '../services/vodFavoritos';
+import { aoMudar as aoMudarVodFav, lista as vodFavoritos } from '../services/vodFavoritos';
 import type { Channel } from '../types/channel';
 
 /** Quantos cartões "Ao vivo agora" cabem numa fileira. */
@@ -118,43 +116,11 @@ export function Inicio() {
   }, [sob]);
 
   const indiceHeroi = candidatosHeroi.length ? giro % candidatosHeroi.length : 0;
-  const itemHeroi = sob ?? candidatosHeroi[indiceHeroi] ?? null;
-  const heroiBase = useHeroiVod(itemHeroi);
-  void vodFav; // o coração do destaque refaz quando os favoritos mudam
-  const heroi = heroiBase && itemHeroi
-    ? {
-      ...heroiBase,
-      acoes: (
-        <>
-          <button type="button" className="heroi-botao principal" onClick={() => abrirVod(itemHeroi)}>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-            Assistir
-          </button>
-          <button
-            type="button"
-            className={`heroi-botao${ehVodFav(itemHeroi) ? ' ativo' : ''}`}
-            onClick={() => { alternarVodFav(itemHeroi); setVodFav(vodFavoritos()); }}
-          >
-            {ehVodFav(itemHeroi) ? '♥ Nos favoritos' : '♡ Favoritar'}
-          </button>
-        </>
-      ),
-    }
-    : null;
+  void sob;
 
-  const pontos = !sob && candidatosHeroi.length > 1 ? (
-    <>
-      {candidatosHeroi.map((c, i) => (
-        <button
-          key={`${c.tipo}${c.titulo}`}
-          type="button"
-          className={`heroi-ponto${i === indiceHeroi ? ' ativo' : ''}`}
-          onClick={() => setGiro(i)}
-          aria-label={`Destaque ${i + 1}: ${nomeLimpo(c.titulo)}`}
-        />
-      ))}
-    </>
-  ) : null;
+  const destaquesTv = candidatosHeroi.length > 0
+    ? [candidatosHeroi[indiceHeroi], candidatosHeroi[(indiceHeroi + 1) % candidatosHeroi.length]].filter(Boolean)
+    : [];
 
   const irParaFileira = (id: string) => {
     document.getElementById(`prat-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -166,7 +132,32 @@ export function Inicio() {
     <div className="tela tela-com-barra">
       <Abertura />
       <BarraTopo />
-      <Heroi item={heroi} rodape={pontos} />
+
+      <section className="tv-destaques" aria-label="Destaques">
+        {destaquesTv.map((item, indice) => {
+          const imagem = item.fundo || item.capa;
+          return (
+            <button
+              type="button"
+              className={`tv-destaque tv-destaque-${indice + 1}`}
+              key={`${item.tipo}-${item.titulo}-${indice}`}
+              onClick={() => abrirVod(item)}
+              onFocus={() => setSob(item)}
+              onMouseEnter={() => setSob(item)}
+              data-focusable="true"
+            >
+              {imagem && <img src={imagem} alt="" referrerPolicy="no-referrer" />}
+              <span className="tv-destaque-sombra" />
+              <span className="tv-destaque-conteudo">
+                <small>{ROTULO_TIPO[item.tipo]}</small>
+                <strong>{nomeLimpo(item.titulo)}</strong>
+                <em><span>▶</span> Assistir</em>
+              </span>
+            </button>
+          );
+        })}
+        {destaquesTv.length === 0 && <div className="tv-destaque tv-destaque-vazio" />}
+      </section>
 
       {filas.length > 1 && (
         <nav className="generos-atalhos" aria-label="Ir para um gênero">
@@ -196,7 +187,7 @@ export function Inicio() {
       )}
 
       {noAr.length > 0 && (
-        <Fileira titulo="Ao vivo agora" aoVerTodos={() => navigate('/tv')} rotuloVerTodos="Abrir Ao vivo">
+        <Fileira titulo="Sports · Ao vivo" aoVerTodos={() => navigate('/tv')} rotuloVerTodos="Abrir Ao vivo">
           {noAr.map(({ canal, titulo, progresso }) => (
             <CartaoLargo
               key={canal.id}

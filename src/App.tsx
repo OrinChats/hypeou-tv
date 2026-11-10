@@ -600,6 +600,13 @@ function MoviesPage() {
 // Layout principal que gerencia scroll
 function AppLayout() {
   const location = useLocation();
+  // Hooks precisam rodar na mesma ordem tanto antes quanto depois do login.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  const { canais, filmes, revCanais, revFilmes } = useListas();
+  const chave = `${canais}|${filmes}|${revCanais}|${revFilmes}`;
+
   const authRaw = localStorage.getItem('hypeou-auth-session');
   let autenticado = false;
   try {
@@ -609,16 +616,6 @@ function AppLayout() {
   if (location.pathname !== '/login' && !autenticado) {
     return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   }
-  
-  // Reset scroll on route change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-
-  // Trocar um endereço em Ajustes refaz as telas de dados do zero: nada de
-  // títulos ou canais da lista anterior ficando na memória de um componente.
-  const { canais, filmes, revCanais, revFilmes } = useListas();
-  const chave = `${canais}|${filmes}|${revCanais}|${revFilmes}`;
 
   return (
     <>
