@@ -214,13 +214,29 @@ export function VodCatalog({
   const local = useLocation();
   const navegar = useNavigate();
 
+  const entrada = useMemo(() => {
+    const busca = new URLSearchParams(local.search);
+    const secaoPedida = busca.get('secao');
+    const secoes: Secao[] = ['filmes', 'series', 'animes', 'doramas', 'extra'];
+    return {
+      secao: secoes.includes(secaoPedida as Secao) ? secaoPedida as Secao : null,
+      modo: busca.get('modo') === 'explorar' ? 'explorar' as const : 'fileiras' as const,
+      genero: busca.get('genero') ?? '', letra: busca.get('letra') || 'A',
+    };
+  }, [local.search]);
+
   // Seção ativa: null é a página raiz On Demand, ou categoria específica
-  const [secao, setSecao] = useState<Secao | null>(null);
+  const [secao, setSecao] = useState<Secao | null>(entrada.secao);
   // Modo de exibição: 'fileiras' (carrosséis como no Mac) ou 'explorar' (grade A-Z)
-  const [modo, setModo] = useState<'fileiras' | 'explorar'>('fileiras');
-  const [generoFiltro, setGeneroFiltro] = useState<string>('');
-  const [letraFiltro, setLetraFiltro] = useState<string>('A');
+  const [modo, setModo] = useState<'fileiras' | 'explorar'>(entrada.modo);
+  const [generoFiltro, setGeneroFiltro] = useState<string>(entrada.genero);
+  const [letraFiltro, setLetraFiltro] = useState<string>(entrada.letra);
   const [termoBusca, setTermoBusca] = useState<string>('');
+
+  useEffect(() => {
+    setSecao(entrada.secao); setModo(entrada.modo);
+    setGeneroFiltro(entrada.genero); setLetraFiltro(entrada.letra); setTermoBusca('');
+  }, [entrada]);
 
   // Favoritos
   const [, setMarcaFav] = useState(0);
