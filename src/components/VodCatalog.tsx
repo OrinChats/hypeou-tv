@@ -841,7 +841,7 @@ export function VodCatalog({
 
   // Voltar do controle com a ficha aberta: fecha a ficha do ator (se houver) e
   // depois a ficha do título — o D-pad do app não adivinha qual é qual.
-  const { registerBackHandler } = useDpad();
+  const { registerBackHandler, setFocus, isEnabled: modoTv } = useDpad();
   useEffect(() => {
     if (!aberto) return;
     return registerBackHandler(() => {
@@ -853,6 +853,21 @@ export function VodCatalog({
       return true;
     });
   }, [aberto, ator, fecharAtor, fecharModal, registerBackHandler]);
+
+  // Na TV, a ficha é uma camada exclusiva: ao abrir, o foco sai do catálogo
+  // que ficou ao fundo e entra diretamente na ação principal. Quando as fontes
+  // terminam de carregar, "Assistir" passa a ser o alvo preferido.
+  useEffect(() => {
+    if (!aberto || !modoTv || playerOpen) return;
+    const timer = window.setTimeout(() => {
+      const janela = janelaRef.current;
+      const alvo = janela?.querySelector<HTMLElement>(
+        '.vod-btn-assistir:not(:disabled), .vod-btn-fav, .vod-btn-fechar, button:not(:disabled)',
+      );
+      if (alvo) setFocus(alvo, false);
+    }, 60);
+    return () => window.clearTimeout(timer);
+  }, [aberto, ator, episodiosAbertos, fontesAbertas, modalCarregando, modoTv, playerOpen, setFocus]);
 
   // Reproduzir filme
   const tocarFilme = useCallback(
@@ -1506,6 +1521,7 @@ export function VodCatalog({
             className="vod-modal-janela"
             role="dialog"
             aria-modal="true"
+            data-dpad-camada="ficha-vod"
             onMouseDown={(e) => e.stopPropagation()}
           >
             {ator ? (
