@@ -219,23 +219,23 @@ export function VodCatalog({
     const secaoPedida = busca.get('secao');
     const secoes: Secao[] = ['filmes', 'series', 'animes', 'doramas', 'extra'];
     return {
-      secao: secoes.includes(secaoPedida as Secao) ? secaoPedida as Secao : null,
-      modo: busca.get('modo') === 'explorar' ? 'explorar' as const : 'fileiras' as const,
-      genero: busca.get('genero') ?? '', letra: busca.get('letra') || 'A',
+      secao: secoes.includes(secaoPedida as Secao) ? secaoPedida as Secao : 'filmes' as Secao,
+      modo: 'explorar' as const,
+      genero: '', letra: busca.get('letra') || 'A',
     };
   }, [local.search]);
 
   // Seção ativa: null é a página raiz On Demand, ou categoria específica
   const [secao, setSecao] = useState<Secao | null>(entrada.secao);
   // Modo de exibição: 'fileiras' (carrosséis como no Mac) ou 'explorar' (grade A-Z)
-  const [modo, setModo] = useState<'fileiras' | 'explorar'>(entrada.modo);
+  const [modo, setModo] = useState<'fileiras' | 'explorar'>('explorar');
   const [generoFiltro, setGeneroFiltro] = useState<string>(entrada.genero);
   const [letraFiltro, setLetraFiltro] = useState<string>(entrada.letra);
   const [termoBusca, setTermoBusca] = useState<string>('');
 
   useEffect(() => {
-    setSecao(entrada.secao); setModo(entrada.modo);
-    setGeneroFiltro(entrada.genero); setLetraFiltro(entrada.letra); setTermoBusca('');
+    setSecao(entrada.secao); setModo('explorar');
+    setGeneroFiltro(''); setLetraFiltro(entrada.letra); setTermoBusca('');
   }, [entrada]);
 
   // Favoritos
@@ -554,6 +554,7 @@ export function VodCatalog({
       for (const g of nomes) {
         const doGenero = lista
           .filter((it) => it.generos.includes(g) && !!it.capa)
+          .slice(0, 25)
           .map((it) => ({
             tipo,
             titulo: it.titulo,
@@ -573,17 +574,20 @@ export function VodCatalog({
     const tipoLetra = ehSerie ? 's' : 'f';
     const prefixoTitulo = secao === null ? 'Filmes de ' : '';
 
-    // Uma passada pelo índice inteiro: cada fileira pode continuar carregando
-    // títulos até o fim, como os carrosséis de serviços de streaming.
+    // As fileiras auxiliares são limitadas para manter TVs antigas responsivas.
     const generosValidos = generosAlvo.filter((g) => generos.todos.includes(g));
     const baldes: Record<string, ItemDestaque[]> = {};
     for (const g of generosValidos) baldes[g] = [];
+
+    const COTA = 25;
+    let pendentes = generosValidos.length;
 
     for (let i = 0; i < listaBase.length; i++) {
       const item = listaBase[i];
       let capaCache: string | null | undefined = undefined;
 
       for (const g of generosValidos) {
+        if (baldes[g].length >= COTA) continue;
         if (temGenero(generos, item.titulo, ehSerie, g)) {
           if (capaCache === undefined) {
             capaCache = capaDaFicha(generos, item.titulo, ehSerie) || '';
@@ -596,9 +600,11 @@ export function VodCatalog({
               ano: item.ano,
               capa: capaCache,
             });
+            if (baldes[g].length === COTA) pendentes--;
           }
         }
       }
+      if (pendentes <= 0) break;
     }
 
     for (const g of generosValidos) {
@@ -1071,17 +1077,6 @@ export function VodCatalog({
     }));
   }, [buscaAtiva, buscaAchados, secao, classif, todasSeries, todosFilmes, letraFiltro, generoFiltro, generos]);
 
-  // Gêneros da barra: os da ficha (Filmes e Séries) ou os que aparecem nos animes/doramas classificados.
-  const generosDaBarra = useMemo<string[]>(() => {
-    if (secao === 'animes' || secao === 'doramas') {
-      const lista = (secao === 'animes' ? classif?.animes : classif?.doramas) ?? [];
-      const contagem = new Map<string, number>();
-      for (const it of lista) for (const g of it.generos) contagem.set(g, (contagem.get(g) ?? 0) + 1);
-      return [...contagem.entries()].filter(([, n]) => n >= 3).sort((a, b) => b[1] - a[1]).map(([g]) => g);
-    }
-    return generos?.todos ?? [];
-  }, [secao, classif, generos]);
-
   return (
     <div className="vod-catalog">
       {/* ── Fundo Do Destaque (Cinema Backdrop) ── */}
@@ -1119,54 +1114,28 @@ export function VodCatalog({
       {/* ── Barra de Navegação / Sub-Categorias ── */}
       <nav className="vod-sub-barra" aria-label="Categorias de filmes e séries">
         <div className="vod-sub-barra-pills" ref={subBarraPillsRef}>
-          {(secao !== null || modo === 'explorar') ? (
-            <button
-              className="vod-sub-pill vod-sub-pill-voltar"
-              onClick={() => {
-                if (modo === 'explorar' && secao === null) setModo('fileiras');
-                else if (secao !== null) { setSecao(null); setModo('fileiras'); }
-                else onBack();
-              }}
-              title="Voltar"
-            >
-              ‹ Voltar
-            </button>
-          ) : (
-            <button
-              className="vod-sub-pill vod-sub-pill-voltar"
-              onClick={onBack}
-              title="Voltar ao início"
-            >
-              ‹ Início
-            </button>
-          )}
-          <button
-            className={`vod-sub-pill${secao === null ? ' ativa' : ''}`}
-            onClick={() => { setSecao(null); setModo('fileiras'); }}
-          >
-            Catálogo
-          </button>
+          <button className="vod-sub-pill vod-sub-pill-voltar" onClick={onBack} title="Voltar ao início">‹ Início</button>
           <button
             className={`vod-sub-pill${secao === 'filmes' ? ' ativa' : ''}`}
-            onClick={() => { setSecao('filmes'); setModo('fileiras'); }}
+            onClick={() => { setSecao('filmes'); setModo('explorar'); setGeneroFiltro(''); setLetraFiltro('A'); }}
           >
             Filmes
           </button>
           <button
             className={`vod-sub-pill${secao === 'series' ? ' ativa' : ''}`}
-            onClick={() => { setSecao('series'); setModo('fileiras'); }}
+            onClick={() => { setSecao('series'); setModo('explorar'); setGeneroFiltro(''); setLetraFiltro('A'); }}
           >
             Séries
           </button>
           <button
             className={`vod-sub-pill${secao === 'animes' ? ' ativa' : ''}`}
-            onClick={() => { setSecao('animes'); setModo('fileiras'); }}
+            onClick={() => { setSecao('animes'); setModo('explorar'); setGeneroFiltro(''); setLetraFiltro('A'); }}
           >
             Animes
           </button>
           <button
             className={`vod-sub-pill${secao === 'doramas' ? ' ativa' : ''}`}
-            onClick={() => { setSecao('doramas'); setModo('fileiras'); }}
+            onClick={() => { setSecao('doramas'); setModo('explorar'); setGeneroFiltro(''); setLetraFiltro('A'); }}
           >
             Doramas
           </button>
@@ -1197,13 +1166,6 @@ export function VodCatalog({
             />
           </label>
 
-          <button
-            className={`vod-sub-btn-modo${modo === 'explorar' ? ' ativo' : ''}`}
-            onClick={() => setModo((m) => (m === 'fileiras' ? 'explorar' : 'fileiras'))}
-            title={modo === 'fileiras' ? 'Explorar grade A a Z' : 'Ver em fileiras'}
-          >
-            {modo === 'fileiras' ? 'A a Z' : 'Fileiras ▤'}
-          </button>
         </div>
       </nav>
 
@@ -1477,27 +1439,6 @@ export function VodCatalog({
                   onClick={() => setLetraFiltro(l)}
                 >
                   {l}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Barra de Gêneros */}
-          {generosDaBarra.length > 0 && (
-            <div className="vod-generos-barra">
-              <button
-                className={`vod-genero-pill${generoFiltro === '' ? ' ativa' : ''}`}
-                onClick={() => setGeneroFiltro('')}
-              >
-                Todos
-              </button>
-              {generosDaBarra.map((g) => (
-                <button
-                  key={g}
-                  className={`vod-genero-pill${generoFiltro === g ? ' ativa' : ''}`}
-                  onClick={() => setGeneroFiltro(generoFiltro === g ? '' : g)}
-                >
-                  {g}
                 </button>
               ))}
             </div>
@@ -2025,20 +1966,14 @@ function CarrosselFileira({
 }: CarrosselFileiraProps) {
   const trilhoRef = useRef<HTMLDivElement | null>(null);
   const [borda, setBorda] = useState({ esq: false, dir: true });
-  const [limite, setLimite] = useState(32);
-
-  useEffect(() => setLimite(32), [titulo, itens]);
 
   const medir = useCallback(() => {
     const el = trilhoRef.current;
     if (!el) return;
-    if (limite < itens.length && el.scrollLeft + el.clientWidth >= el.scrollWidth - el.clientWidth * 1.5) {
-      setLimite((atual) => Math.min(itens.length, atual + 32));
-    }
     const esq = el.scrollLeft > 6;
-    const dir = limite < itens.length || el.scrollLeft + el.clientWidth < el.scrollWidth - 6;
+    const dir = el.scrollLeft + el.clientWidth < el.scrollWidth - 6;
     setBorda((prev) => (prev.esq !== esq || prev.dir !== dir ? { esq, dir } : prev));
-  }, [itens.length, limite]);
+  }, []);
 
   useEffect(() => {
     medir();
@@ -2047,7 +1982,6 @@ function CarrosselFileira({
   }, [medir, itens]);
 
   const rolar = (sentido: number) => {
-    if (sentido > 0 && limite < itens.length) setLimite((atual) => Math.min(itens.length, atual + 32));
     trilhoRef.current?.scrollBy({ left: sentido * 540, behavior: 'smooth' });
   };
 
@@ -2082,7 +2016,7 @@ function CarrosselFileira({
           onWheel={onWheel}
           onMouseLeave={() => aoPassar(null)}
         >
-          {itens.slice(0, limite).map((item) => {
+          {itens.map((item) => {
             const fav = ehFavorito(item);
             return (
               <button
@@ -2112,7 +2046,7 @@ function CarrosselFileira({
             );
           })}
 
-          {verTodos && limite >= itens.length && (
+          {verTodos && (
             <button className="vod-card-ver-todos" onClick={verTodos}>
               <div className="vod-card-ver-todos-thumb">
                 <span className="vod-card-ver-todos-icone">›</span>

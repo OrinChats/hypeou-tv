@@ -631,49 +631,6 @@ body:has(.barra-topo.oculta) .vod-sub-barra {
   color: rgba(255, 255, 255, 0.55);
 }
 
-/* Catálogo em fileiras cinematográficas: proporções e movimento de streaming. */
-@media (min-width: 769px) {
-  .vod-conteudo-fileiras { gap: .55rem; padding-bottom: 4rem; }
-  .vod-fileira { margin-bottom: 1.4rem; overflow: visible; }
-  .vod-fileira-header { padding-inline: 3.2vw; margin-bottom: .55rem; }
-  .vod-fileira-header h2 { font-size: clamp(1.18rem, 1.45vw, 1.65rem); }
-  .vod-fileira-trilho { gap: 7px; padding: 10px 3.2vw 26px; overflow-y: visible; }
-  .vod-card-poster {
-    flex-basis: clamp(220px, 19vw, 330px);
-    width: clamp(220px, 19vw, 330px);
-    gap: 0;
-    position: relative;
-    z-index: 1;
-  }
-  .vod-card-poster-thumb {
-    aspect-ratio: 16 / 9;
-    border: 0;
-    border-radius: 6px;
-    box-shadow: 0 8px 22px rgba(0,0,0,.48);
-    transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s ease;
-  }
-  .vod-card-poster-thumb img { object-fit: cover; object-position: center 30%; }
-  .vod-card-poster:hover, .vod-card-poster:focus-visible { z-index: 8; outline: 0; }
-  .vod-card-poster:hover .vod-card-poster-thumb,
-  .vod-card-poster:focus-visible .vod-card-poster-thumb {
-    transform: scale(1.11);
-    border: 0;
-    box-shadow: 0 18px 40px rgba(0,0,0,.8), 0 0 0 3px #fff;
-  }
-  .vod-card-poster-nome, .vod-card-poster-ano { display: none; }
-  .vod-fileira-seta {
-    top: 10px;
-    bottom: 26px;
-    width: 52px;
-    border: 0;
-    border-radius: 0;
-    background: rgba(8,8,8,.72);
-    font-size: 2.6rem;
-  }
-  .vod-fileira-seta:hover, .vod-fileira-seta:focus-visible { background: rgba(8,8,8,.92); }
-  .vod-card-ver-todos { flex-basis: clamp(220px, 19vw, 330px); width: clamp(220px, 19vw, 330px); }
-  .vod-card-ver-todos-thumb { aspect-ratio: 16 / 9; border-radius: 6px; }
-}
 
 /* ── Conteúdo em Grade (Modo Explorar A-Z) ────────────────────────────────── */
 

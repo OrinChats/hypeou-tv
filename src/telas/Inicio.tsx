@@ -129,21 +129,9 @@ export function Inicio() {
   const abrirCanal = (c: Channel) => navigate(`/tv/${c.id}`);
 
   const abrirCatalogoDaFileira = (fila: Prateleira) => {
-    const porId: Record<string, { secao: string; genero?: string }> = {
-      acao: { secao: 'filmes', genero: 'Ação' }, terror: { secao: 'filmes', genero: 'Terror' },
-      comedia: { secao: 'filmes', genero: 'Comédia' }, ficcao: { secao: 'filmes', genero: 'Ficção científica' },
-      suspense: { secao: 'filmes', genero: 'Suspense' }, romance: { secao: 'filmes', genero: 'Romance' },
-      aventura: { secao: 'filmes', genero: 'Aventura' }, familia: { secao: 'filmes', genero: 'Animação' },
-      drama: { secao: 'filmes', genero: 'Drama' }, documentarios: { secao: 'filmes', genero: 'Documentário' },
-      'series-acao': { secao: 'series', genero: 'Ação e aventura' },
-      'series-crime': { secao: 'series', genero: 'Crime' },
-      'series-ficcao': { secao: 'series', genero: 'Ficção e fantasia' },
-      'series-comedia': { secao: 'series', genero: 'Comédia' },
-      'series-em-alta': { secao: 'series' }, animes: { secao: 'animes' }, doramas: { secao: 'doramas' },
-    };
-    const destino = porId[fila.id] ?? { secao: 'filmes' };
-    const busca = new URLSearchParams({ secao: destino.secao, modo: 'explorar', letra: 'A' });
-    if (destino.genero) busca.set('genero', destino.genero);
+    const series = fila.id.startsWith('series-');
+    const secao = fila.id === 'animes' ? 'animes' : fila.id === 'doramas' ? 'doramas' : series ? 'series' : 'filmes';
+    const busca = new URLSearchParams({ secao, letra: 'A' });
     navigate(`/movies?${busca.toString()}`);
   };
 
