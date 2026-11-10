@@ -22,6 +22,7 @@ import './App.css';
 import './styles/owntv-inspired.css';
 import './styles/hypeou-refresh.css';
 import { IconeMaterial } from './components/IconeMaterial';
+import { emModoTv } from './plataforma/modo';
 
 /**
  * Celular: tela estreita, ou celular deitado. Deitado ele passa dos 768 px de
@@ -96,6 +97,20 @@ function TVPage() {
   // Canais já vêm abertos no lado ao entrar no Ao vivo
   const [isChannelsPanelOpen, setIsChannelsPanelOpen] = useState(() => window.innerWidth > 640 || !ehCelular());
   const [controlsVisible, setControlsVisible] = useState(true);
+  const modoTv = emModoTv();
+
+  // No aplicativo de TV, Voltar sempre sai do Ao vivo e retorna à página
+  // inicial, independentemente do canal que estiver tocando.
+  useEffect(() => {
+    if (!modoTv) return;
+    const voltarAoInicio = (evento: Event) => {
+      evento.preventDefault();
+      setIsChannelsPanelOpen(false);
+      navigate('/');
+    };
+    window.addEventListener('hypeou-back', voltarAoInicio);
+    return () => window.removeEventListener('hypeou-back', voltarAoInicio);
+  }, [modoTv, navigate]);
 
   // Ao navegar para /tv novamente, reabre os canais
   const [prevPath, setPrevPath] = useState(location.pathname);
@@ -158,14 +173,15 @@ function TVPage() {
   const handleSelectChannel = useCallback((channel: Channel) => {
     if (isMultiScreen && activeSide === 'secondary') {
       setSecondChannel(channel);
+      setIsChannelsPanelOpen(false);
       showToast(`Tela 2: ${channel.name}`, 'info');
       return;
     }
     setSelectedChannel(channel);
     setSelectedMovie(null);
     setLastChannelId(channel.id);
-    // Na versão web, escolher o canal não altera a abertura do painel.
-    // Na versão web a lista permanece sob controle do usuário.
+    // OK no canal abre a transmissão e libera toda a tela.
+    setIsChannelsPanelOpen(false);
     showToast(isMultiScreen ? `Tela 1: ${channel.name}` : `Assistindo: ${channel.name}`, 'info');
   }, [isMultiScreen, activeSide, setLastChannelId, showToast, setSelectedChannel]);
 

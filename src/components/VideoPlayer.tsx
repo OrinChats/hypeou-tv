@@ -1168,7 +1168,7 @@ export const VideoPlayer = memo(function VideoPlayer({
           <div className="video-veu-fundo" />
 
           {/* Pilha flutuante de controles com Cartão No Ar e Barra de Vidro */}
-          <div
+          {!emModoTv() && <div
             className={`video-floating-stack ${showControls ? 'visible' : ''}`}
             style={{ paddingLeft: isChannelsPanelOpen ? '420px' : '0px' }}
             onMouseMove={resetControlsTimeout}
@@ -1433,7 +1433,7 @@ export const VideoPlayer = memo(function VideoPlayer({
                 )}
               </button>
             </div>
-          </div>
+          </div>}
 
           {/* Mensagem de cast */}
           {castMessage && (

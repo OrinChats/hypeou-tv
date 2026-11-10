@@ -102,6 +102,8 @@ export function DpadProvider({ children }: PropsWithChildren) {
       } else {
         e.preventDefault();
         e.stopPropagation();
+        const voltar = new CustomEvent('hypeou-back', { cancelable: true });
+        if (!window.dispatchEvent(voltar)) return;
         const ultimo = backHandlers.current.at(-1);
         if (!ultimo || ultimo() !== true) history.back();
       }
