@@ -222,6 +222,18 @@ export const MoviePlayer = memo(function MoviePlayer({ movie, onBack, seriesInfo
 
   const urlAtiva = fontes[fonteIdx]?.url ?? movie?.url ?? '';
   const urlExterna = urlAtiva; // somente para ações opcionais acionadas manualmente no menu do player.
+  const abrirHttpDiretoNoApp = resolverNoSite
+    && /HypeouTV\//i.test(window.navigator.userAgent)
+    && urlAtiva.startsWith('http://');
+
+  // O WebView do aplicativo permite conteúdo HTTP. Nele, a antiga ação do
+  // botão azul acontece automaticamente: sai do site e abre o arquivo de vídeo
+  // diretamente. Voltar no controle retorna ao catálogo pelo histórico.
+  useEffect(() => {
+    if (!abrirHttpDiretoNoApp || resolvendo || !urlAtiva) return;
+    window.location.assign(urlAtiva);
+  }, [abrirHttpDiretoNoApp, resolvendo, urlAtiva]);
+
   // No navegador, tenta primeiro a URL HTTPS direta; se CORS/rede impedir,
   // tenta a mesma fonte pelo proxy da aplicação antes de trocar de servidor.
   const urlDeReproducao = needsProxy(urlAtiva)
